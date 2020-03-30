@@ -1,0 +1,57 @@
+Comment[ArrayExpressAccession]	E-GEOD-36824
+Public Release Date	2012-03-27							
+Investigation Title	Clonal competition with alternating dominance in multiple myeloma [GEP]							
+Comment[Submitted Name]	Clonal competition with alternating dominance in multiple myeloma [GEP]
+Experiment Description	Copy number and  expression profiling of multiple myeloma patients at multiple stages of their individual clinical course Identification of evolutionary patterns in multiple myeloma Gene expression analysis of individual CD138 purified tumor populations using Affymertix U133Plus2.0 GeneChips							
+Date of Experiment								
+Term Source Name	EFO
+Term Source Version								
+Term Source File	http://www.ebi.ac.uk/efo/efo.owl							
+Person Last Name	Keats	Keats	Bergsagel					
+Person First Name	Jonathan	Jonathan	P					
+Person Mid Initials	J	J	L					
+Person Email	jkeats@tgen.org							
+Person Affiliation	Translational Genomics Research Institute (TGen)							
+Person Phone	602-343-8690							
+Person Fax	602-343-8740							
+Person Address	Integrated Cancer Genomics, Translational Genomics Research Institute (TGen), 445 N. Fifth Street, Phoenix, Arizona, Canada							
+Person Roles	submitter							
+Person Roles Term Source REF								
+Person Roles Term Accession Number								
+Normalization Type								
+Normalization Term Accession Number								
+Normalization Term Source REF								
+Replicate Type								
+Replicate Term Accession Number								
+Replicate Term Source REF								
+Experimental Design								
+Experimental Design Term Accession Number								
+Experimental Design Term Source REF								
+Quality Control Type								
+Quality Control Term Accession Number								
+Quality Control Term Source REF								
+Protocol Name	P-GSE36824-1	P-GSE36824-6	P-GSE36824-3	P-GSE36824-8	P-GSE36824-7	P-GSE36824-2	P-GSE36824-4	P-GSE36824-5
+Protocol Description	ID_REF = <br>VALUE = MAS5 signal<br>ABS_CALL = <br>DETECTION P-VALUE = 	Labeled cRNA was hybridized to U133Plus2.0 GeneChips in a GeneChip Hybridization Oven 640 and washed using a GeneChip Fluidics Station 450 as per the manufacturers protocol	Bone marrow aspirates were attained from patients after they signed informed consent documetnation	Signal estimates were generated in Expression Console (Affymetrix) using the MAS5 algorithm with default settings	Arrays were scanned using a GeneChip Scanner 3000 following the recommendations of the manufacturer	CD138 positive tumor cells were isolated from bone marrow aspirates using magnetic sorting, both Miltenyi and Stem Cell Technologies	RNA was extracted from cells using TRIzol (Invitrogen) in combination with PureLink Micro-to-Midi RNA columns (Invitrogen) using the manufacturers protocol. RNA samples were tested for purity and concentration on a Nanodrop spectrophotometer and quality checked on an Agilent Bioanalyzer	2 ug of Total RNA was labeled using the One-Cycle Target Labeling kit from Affymetrix as per the manufacturers suggestion
+Protocol Software								
+Protocol Hardware								
+Protocol Contact								
+Protocol Type	bioassay_data_transformation	hybridization	grow	feature_extraction	image_aquisition	specified_biomaterial_action	nucleic_acid_extraction	labeling
+Protocol Term Source REF								
+Protocol Term Accession Number								
+Experimental Factor Name	17P13 DELETION	CYTO RISK	COPY NUMBER ABNORMALITIES	SAMPLE ORDER	TC CLASS	UAMS 70GENE INDEX	TIME SINCE SAMPLE1 MONTHS	PLOIDY
+Experimental Factor Type	17p13 deletion	cyto risk	copy number abnormalities	sample order	tc class	uams 70gene index	time since sample1 months	ploidy
+Experimental Factor Term Source REF								
+Experimental Factor Term Accession Number								
+Publication Title								
+Publication Author List								
+PubMed ID								
+Publication DOI								
+Publication Status								
+Publication Status Term Source REF								
+Publication Status Term Accession Number								
+Comment[SecondaryAccession]	GSE36824							
+Comment[GEOLastUpdateDate]	2012-03-28
+Comment[AEExperimentType]	transcription profiling by array							
+Comment[GEOReleaseDate]	2012-03-26
+Comment[ArrayExpressSubmissionDate]	2012-03-26
+SDRF File	E-GEOD-36824.sdrf.txt

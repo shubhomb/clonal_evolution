@@ -15,12 +15,12 @@ class Subclone(Enum):
     # etc.
 
 class Node():
-    def __init__(self):        
-        self.subclone_type = Subclone.BLANK
-        self.out_edges  = []
-        self.in_edges   = []
+    def __init__(self, name, birth_time, coord, parent=None):
+        self.name = name
+        self.birth_time = birth_time
+        self.parent = parent
+        self.coordinate = coord
 
-    
 class Graph():
     def __init__(self, env):
         """ 
