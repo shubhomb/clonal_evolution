@@ -9,17 +9,12 @@ def parse_json(path_to_file):
         data = json.load(f)
     return data
 
-class PhenoSpace():
-    def __init__(self, dims):
-        self.d = dims
-        self.environment_func = None
-        self.doctor_func = None
+class Simulation():
+    def __init__(self, graph, progenitor, max_timesteps):
+        self.t = 0
+        self.max_timesteps = 0
+        self.graph = graph
 
-    def distance(self, x1, x2):
-        return np.sqrt(np.sum(np.square(x2 - x1)))
-
-    def nearest_neighbors(self, x1, coords):
-        return np.sort([self.distance(x1, coord) for coord in coords])
 
 
 
