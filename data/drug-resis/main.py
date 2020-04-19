@@ -27,7 +27,7 @@ if __name__ == "__main__":
                     'alpha':    0.03,
                     'beta':     0.03,
                     'dB':       0,
-                    'dA':       1
+                    'dA':       0
                     }
     model = Evolve(model_data)
 
@@ -42,7 +42,16 @@ if __name__ == "__main__":
     
     model.log()
 
-    for _ in range(MAX_TIME):
+    for t in range(MAX_TIME):
+        
+        # Treatment
+        if( t < MAX_TIME//2):
+            model.modify_drug('dA', 1)
+            model.modify_drug('dB', 0)
+        else:
+            model.modify_drug('dA', 0)
+            model.modify_drug('dB', 1)
+
 
         # Calculuate Fitness
         model.colonyA.fitness = model.get_fitness('A')
@@ -52,6 +61,8 @@ if __name__ == "__main__":
         # Adjust Proportion
         model.adjust_proportion()
         
+
+        # Log Data
         propA, propB, propS = extract_prop(model)
         fitA, fitB, fitS    = extract_fit(model)
 
@@ -64,6 +75,8 @@ if __name__ == "__main__":
         logfitS.append(fitS)
         model.log()
         model.inc_time()
+
+    # Plot Resulting Curves
     
     x_axis = [k for k in range(MAX_TIME)]
     import matplotlib.pyplot as plt

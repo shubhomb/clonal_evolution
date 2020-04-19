@@ -85,6 +85,9 @@ class Evolve:
     def inc_time(self):
         self.time += 1
 
+    def modify_drug(self, drugname, amt):
+        self.data[drugname] = amt
+
     def __init__(self, dic=None, num_med=2):        
         """
             :attr time: Time stamp starting from t=0
