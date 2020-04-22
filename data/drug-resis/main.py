@@ -17,14 +17,23 @@ def extract_prop(model):
     propS = colonies[2].prop
     return propA, propB, propS
 
+def run_sim(cs, alphas, num_iters, doc_actions)
+    assert len(cs) == len(alphas)
 
+    model_data = {  'cA':       0.03,
+                    'cB':       0.01,
+                    'alpha':    0.05,
+                    'beta':     0.03,
+                    'dB':       0,
+                    'dA':       0
+                    }
 if __name__ == "__main__":
     """
         Start Simulation
     """
-    model_data = {  'cA':       0.01,
+    model_data = {  'cA':       0.03,
                     'cB':       0.01,
-                    'alpha':    0.03,
+                    'alpha':    0.05,
                     'beta':     0.03,
                     'dB':       0,
                     'dA':       0
@@ -46,11 +55,11 @@ if __name__ == "__main__":
         
         # Treatment
         if( t < MAX_TIME//2):
-            model.modify_drug('dA', 1)
+            model.modify_drug('dA', 0.9)
             model.modify_drug('dB', 0)
         else:
             model.modify_drug('dA', 0)
-            model.modify_drug('dB', 1)
+            model.modify_drug('dB', 0.5)
 
 
         # Calculuate Fitness
@@ -80,10 +89,16 @@ if __name__ == "__main__":
     
     x_axis = [k for k in range(MAX_TIME)]
     import matplotlib.pyplot as plt
-    plt.plot(x_axis, logpropA, x_axis, logpropB, x_axis, logpropS)
-    title = 'Proportions over Time'
+    plt.grid()
+    plt.xlabel("t")
+    plt.ylabel("proprtion of tumor population")
+    plt.plot(x_axis, logpropA, label="A")
+    plt.plot(x_axis, logpropB, label="B")
+    plt.plot(x_axis, logpropS, label="S")
+    plt.legend()
+    title = str(model_data)
     plt.title(title)
-    plt.savefig(title + ".png")
+    plt.savefig("viz/evolution" + ".png")
     plt.close()
     
 

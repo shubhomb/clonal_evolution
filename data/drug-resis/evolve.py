@@ -5,7 +5,7 @@ class Colony:
         :attr fitness:  Current fitness
         :attr prop:     Current Proportion
     """
-    def __init__(self, lbl, data, prop=0.333):
+    def __init__(self, lbl, prop=0.333):
         self.label = lbl
         self.fitness = 1
         self.prop = prop
@@ -62,9 +62,9 @@ class Evolve:
 
     def log(self):
         header = f'At time step t = {self.time}:'
-        astr = f'A:\t prop{round(self.colonyA.prop,5)} \t {round(self.colonyA.fitness, 5)}'
-        bstr = f'B:\t prop{round(self.colonyB.prop,5)} \t {round(self.colonyB.fitness, 5)}'
-        sstr = f'S:\t prop{round(self.colonyS.prop, 5)} \t {round(self.colonyS.fitness, 5)}'
+        astr = f'A:\t prop: {round(self.colonyA.prop,5)} \t fitness:{round(self.colonyA.fitness, 5)}'
+        bstr = f'B:\t prop: {round(self.colonyB.prop,5)} \t fitness:{round(self.colonyB.fitness, 5)}'
+        sstr = f'S:\t prop: {round(self.colonyS.prop, 5)} \t fitness:{round(self.colonyS.fitness, 5)}'
         print(header + '\n\t' + astr + '\n\t' + bstr + '\n\t' + sstr + '\n')
         
 
@@ -88,7 +88,7 @@ class Evolve:
     def modify_drug(self, drugname, amt):
         self.data[drugname] = amt
 
-    def __init__(self, dic=None, num_med=2):        
+    def __init__(self, dic=None, num_med=2):
         """
             :attr time: Time stamp starting from t=0
             :attr data: dictionary containing envirnoment parameters
@@ -101,7 +101,7 @@ class Evolve:
         self.data = {}
 
         if dic == None:
-            assert ['cA', 'cB', 'alpha', 'beta', 'dB', 'dA'] in data.keys()
+            assert ['cA', 'cB', 'alpha', 'beta', 'dB', 'dA'] in self.data.keys()
             assert len(dic) == 6
             self.data = {'cA': 0,
                          'cB': 0,
@@ -112,10 +112,9 @@ class Evolve:
                          }
         else:
             self.data = dic
-    
+
         self.colonyA = Colony('A', self.data)     # RA
         self.colonyB = Colony('B', self.data)     # RB
         self.colonyS = Colony('S', self.data)     # S
-        
 
-        
+
