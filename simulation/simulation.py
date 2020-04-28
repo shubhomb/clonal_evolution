@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
 import os
+from scipy.optimize import *
 import json
 
 
@@ -77,21 +78,34 @@ class Simulation:
         return  self.calc_avg_fitness()
 
 
-def run_sim(max_time, num_treatments, treatments, subclones, treatment_names):
+def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, doc_times=None):
+    '''
+
+    :param max_time (int): The number of timesteps to consider
+    :param num_treatments (int): Number of possible drugs administered
+    :param treatments (np.ndarray): shape (max_time, num_treatments) for pre-scheduled treatments. Can be zeros if doctor responds in real time
+    :param subclones (list): Subclonal populations present initially.
+    :param treatment_names (list): names of each treatments (list length = num_treatments)
+    :param doc_interval (np.ndarray): shape (max_time) with booleans representing if doctor can act at t. Default: can act at each step.
+    :return:
+    '''
     if not treatments.shape[0] == max_time and treatments.shape[1] == num_treatments:
         raise ValueError("Unexpected treatment shape, should be (timesteps, number of treatments")
     if len(treatment_names) != treatments.shape[1]:
         raise ValueError("Treatment names and number of treatments should be same")
-
+    if doc_times is None:
+        doc_times = np.ones(shape=num_treatments)
 
     model = Simulation(subclones, treatments)
-
+    doc = Doctor(model)
 
     log_fitness = np.zeros(shape=(MAX_TIME, len(subclones)))
     log_props = np.zeros(shape=(MAX_TIME, len(subclones)))
     log_avg_fitness = np.zeros(shape=(MAX_TIME))
 
     for t in range(MAX_TIME):
+        if doc_times[t]:
+            doc.greedy_proportion()
         avg = model.run_step()
         # Adjust Proportion
         model.adjust_proportion()
@@ -168,6 +182,21 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names):
 
 
 
+class Doctor():
+    def __init__(self, simulation):
+        self.simulation = simulation
+        self.num_drugs = simulation.treatments.shape[1]
+
+    def change_treatment(self, t, treatment):
+        self.simulation.treatments[t, :] = treatment
+
+    def greedy_proportion(self, magnitude=1.0):
+        fittest_subclone = self.simulation.subclones[np.argmax([f.fitness for f in self.simulation.subclones])]
+        sus_drug = np.argmax(fittest_subclone.alpha)
+        treatment = np.zeros(self.num_drugs)
+        treatment[sus_drug] = magnitude
+        self.change_treatment(self.simulation.t + 1, treatment)
+
 
 
 
@@ -176,17 +205,21 @@ if __name__ == "__main__":
     MAX_TIME = 100
     num_treatments = 2
     treatments = np.zeros(shape=(MAX_TIME, num_treatments))
-    for t in range(MAX_TIME):
-        p = np.random.uniform()
-        if p < 0.5:
-            treatments[t, 0] = np.random.uniform(0.5, 1.0)
-        else:
-            treatments[t, 1] = np.random.uniform(0.5, 1.0)
+    # for t in range(MAX_TIME):
+    #     p = np.random.uniform()
+    #     if p < 0.5:
+    #         treatments[t, 0] = np.random.uniform(0.5, 1.0)
+    #     else:
+    #         treatments[t, 1] = np.random.uniform(0.5, 1.0)
 
     subclones = [Subclone(lbl="A",c=0.03, alpha=[0.05, 1.1], prop=0.05),
                  Subclone(lbl="B", c=0.03, alpha=[1.1, 0.03], prop=0.05),
                  Subclone(lbl="S", c=0.0, alpha=[1.0, 1.0], prop=0.9),
                  ]
     tnames = ["Drug A", "Drug B"]
-    run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames)
+
+    # Let doctor prescribe every 5 time intervals
+    dt = np.zeros(MAX_TIME)
+    dt[::5] = 1
+    run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames,doc_times=dt)
 

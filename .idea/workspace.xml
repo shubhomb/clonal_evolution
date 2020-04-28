@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a00cb376-15da-4041-b3b3-d19558dc2749" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/drug-resis/evolve.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/drug-resis/evolve.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/drug-resis/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/drug-resis/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simulation/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/simulation.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,7 +18,7 @@
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$viz.coverage" NAME="viz Coverage Results" MODIFIED="1586104483946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/search_engine_viz" />
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$graph.coverage" NAME="graph Coverage Results" MODIFIED="1587495307784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graph" />
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$gompertz_growth.coverage" NAME="gompertz_growth Coverage Results" MODIFIED="1586102584444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/mm_clonal_evolution$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1587525178594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simulation" />
+    <SUITE FILE_PATH="coverage/mm_clonal_evolution$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1588041706302" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simulation" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -40,18 +38,21 @@
     <session id="-1021577653">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="14" />
-          <entry key="project.open.time.1" value="2" />
+          <entry key="project.closed" value="18" />
+          <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.13" value="1" />
-          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.14" value="2" />
           <entry key="project.open.time.18" value="2" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.22" value="1" />
+          <entry key="project.open.time.28" value="1" />
           <entry key="project.open.time.3" value="2" />
+          <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="14" />
+          <entry key="project.opened" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -59,18 +60,18 @@
           <entry key="LICENSE" value="1" />
           <entry key="gitignore" value="1" />
           <entry key="md" value="1" />
-          <entry key="npy" value="3" />
-          <entry key="png" value="24" />
-          <entry key="py" value="19" />
+          <entry key="npy" value="4" />
+          <entry key="png" value="35" />
+          <entry key="py" value="20" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="24" />
+          <entry key="Image" value="35" />
           <entry key="Markdown" value="1" />
-          <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="19" />
+          <entry key="PLAIN_TEXT" value="8" />
+          <entry key="Python" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -78,50 +79,28 @@
           <entry key="LICENSE" value="13" />
           <entry key="gitignore" value="22" />
           <entry key="md" value="4790" />
-          <entry key="py" value="11220" />
+          <entry key="py" value="13014" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Markdown" value="4790" />
           <entry key="PLAIN_TEXT" value="35" />
-          <entry key="Python" value="11220" />
+          <entry key="Python" value="13014" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/drug-resis/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1712">
-              <caret line="115" selection-start-line="30" selection-start-column="3" selection-end-line="115" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/drug-resis/evolve.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="7" column="26" selection-end-line="120" />
-              <folding>
-                <marker date="1587518217388" expanded="true" signature="542:551" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/simulation/simulation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="183" column="44" selection-start-line="183" selection-start-column="44" selection-end-line="183" selection-end-column="44" />
+            <state relative-caret-position="-30">
+              <caret line="203" column="26" lean-forward="true" selection-start-line="203" selection-start-column="26" selection-end-line="203" selection-end-column="26" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1587525178109" expanded="true" signature="499:531" ph="..." />
-                <marker date="1587525178109" expanded="true" signature="2571:5535" ph="..." />
+                <marker date="1588041705762" expanded="true" signature="528:560" ph="..." />
               </folding>
             </state>
           </provider>
@@ -184,6 +163,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -195,6 +175,34 @@
               <item name="mm_clonal_evolution" type="b2602c69:ProjectViewProjectNode" />
               <item name="mm_clonal_evolution" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mm_clonal_evolution" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mm_clonal_evolution" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="simulations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mm_clonal_evolution" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mm_clonal_evolution" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="simulations" type="462c0819:PsiDirectoryNode" />
+              <item name="2020_04_21_3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mm_clonal_evolution" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mm_clonal_evolution" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="simulations" type="462c0819:PsiDirectoryNode" />
+              <item name="attack_fittest_int5" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mm_clonal_evolution" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mm_clonal_evolution" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="simulations" type="462c0819:PsiDirectoryNode" />
+              <item name="attack_fittest_int5" type="462c0819:PsiDirectoryNode" />
+              <item name="params" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mm_clonal_evolution" type="b2602c69:ProjectViewProjectNode" />
@@ -211,16 +219,10 @@
               <item name="mm_clonal_evolution" type="462c0819:PsiDirectoryNode" />
               <item name="simulation" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="mm_clonal_evolution" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mm_clonal_evolution" type="462c0819:PsiDirectoryNode" />
-              <item name="virtual_env" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -390,13 +392,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29932886" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32013422" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.34184396" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.34184396" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -404,38 +407,15 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067115" side_tool="true" weight="0.34184396" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32907802" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32907802" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.70067114" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.6805369" />
       <window_info anchor="right" id="Database" order="4" weight="0.3295302" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29932886" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.34184396" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32907802" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32907802" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.70067114" />
-      <window_info anchor="right" id="Database" order="4" weight="0.3295302" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -495,10 +475,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-            <marker date="1586890820419" expanded="true" signature="389:392" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -506,10 +482,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="61" selection-start-line="61" selection-end-line="72" />
-          <folding>
-            <element signature="e#82#100#0" expanded="true" />
-            <marker date="1586892048763" expanded="true" signature="523:1425" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -517,10 +489,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="15" column="41" lean-forward="true" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
-          <folding>
-            <marker date="1586984052034" expanded="true" signature="41:46" ph="..." />
-            <marker date="1586984052034" expanded="true" signature="357:366" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -531,9 +499,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-16">
           <caret line="45" column="15" lean-forward="true" selection-start-line="45" selection-start-column="15" selection-end-line="45" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -544,15 +509,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_1_2_3_4/alphas.npy">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_1_2/metadata.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21/metadata.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_1_2_3_4/alphas.npy" />
+    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_1_2/metadata.txt" />
+    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21/metadata.txt" />
     <entry file="file://$USER_HOME$/Anaconda3/Lib/genericpath.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -563,28 +522,26 @@
     <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_0/proportions.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_0/treatments.npy">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_2/treatments.npy">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_0/treatments.npy" />
+    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_2/treatments.npy" />
+    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_5/fitness.png" />
+    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_5/proportions.png" />
     <entry file="file://$PROJECT_DIR$/data/drug-resis/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1712">
-          <caret line="115" selection-start-line="30" selection-start-column="3" selection-end-line="115" />
+        <state relative-caret-position="1728">
+          <caret line="108" selection-start-line="108" selection-end-line="108" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/drug-resis/evolve.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
+        <state relative-caret-position="112">
           <caret line="7" column="26" selection-end-line="120" />
-          <folding>
-            <marker date="1587518217388" expanded="true" signature="542:551" ph="..." />
-          </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_2/treatments.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_2/proportions.png">
       <provider selected="true" editor-type-id="images" />
@@ -592,20 +549,34 @@
     <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_2/fitness.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_5/fitness.png">
+    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_3/treatments.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_5/proportions.png">
+    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_3/proportions.png">
       <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/2020_04_21_3/fitness.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/attack_fittest_int5/treatments.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/attack_fittest_int5/proportions.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/attack_fittest_int5/fitness.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/attack_fittest_int5/params/alphas.npy">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/simulation/simulation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="183" column="44" selection-start-line="183" selection-start-column="44" selection-end-line="183" selection-end-column="44" />
+        <state relative-caret-position="-30">
+          <caret line="203" column="26" lean-forward="true" selection-start-line="203" selection-start-column="26" selection-end-line="203" selection-end-column="26" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1587525178109" expanded="true" signature="499:531" ph="..." />
-            <marker date="1587525178109" expanded="true" signature="2571:5535" ph="..." />
+            <marker date="1588041705762" expanded="true" signature="528:560" ph="..." />
           </folding>
         </state>
       </provider>
