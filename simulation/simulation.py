@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
 import os
@@ -16,10 +17,11 @@ class Subclone:
 
     def __init__(self, lbl, c, alpha, prop=0.333):
         self.label = lbl
-        self.fitness = 1
+        self.fitness = 1.0
         self.prop = prop
         self.c = c
         self.alpha = alpha
+
     def __str__(self):
         return self.label
 
@@ -31,6 +33,26 @@ class Subclone:
         self.fitness = 1 - self.c - np.dot(self.alpha, treatment)
         return self.fitness
 
+class PayoffMatrix():
+    def __init__(self, sim):
+        self.sim = sim
+        self.matrix = np.zeros(shape=(len(self.sim.subclones), len(self.sim.subclones)))
+        self.populate_matrix(self.sim.t)
+
+    def populate_matrix(self, t):
+        treatments = self.sim.treatments[t, :]
+        for i in range(len(self.sim.subclones)):
+            for j in range(len(self.sim.subclones)):
+                fj = np.dot(self.sim.subclones[j].alpha, treatments)
+                fi = np.dot(self.sim.subclones[i].alpha, treatments)
+                # print (self.sim.subclones[j].alpha)
+                # print (treatments)
+                self.matrix[i, j] = fi - fj
+
+    def print_matrix(self):
+        labs = [s.label for s in self.sim.subclones]
+        self.pretty_matrix = pd.DataFrame(self.matrix, index=labs, columns=labs)
+        print (self.pretty_matrix)
 class Simulation:
     """
         Simulation Class contains relevant methods to simulate the evolution
@@ -65,7 +87,7 @@ class Simulation:
         """
         Given fitness environment, returns average fitness.
         """
-        return sum([c.prop * c.fitness for c in self.subclones])
+        return np.sum([c.prop * c.fitness for c in self.subclones])
 
     def run_step(self):
         for c in self.subclones:
@@ -98,14 +120,17 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
 
     model = Simulation(subclones, treatments)
     doc = Doctor(model)
-
     log_fitness = np.zeros(shape=(MAX_TIME, len(subclones)))
     log_props = np.zeros(shape=(MAX_TIME, len(subclones)))
     log_avg_fitness = np.zeros(shape=(MAX_TIME))
 
     for t in range(MAX_TIME):
         if doc_times[t]:
-            doc.greedy_proportion()
+            doc.greedy_fittest()
+        matx = PayoffMatrix(model)
+        if t == 0 or t == 2:
+            matx.print_matrix()
+        del(matx)
         avg = model.run_step()
         # Adjust Proportion
         model.adjust_proportion()
@@ -155,7 +180,7 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
     plt.ylabel("fitness of tumor population")
     for i in range(len(subclones)):
         plt.plot(x_axis, log_fitness[:, i].flatten(), label=subclones[i].label)
-    plt.plot (x_axis, log_avg_fitness, label="average")
+    plt.plot (x_axis, log_avg_fitness,  label="average")
     plt.legend()
     title = "Subclonal fitness over time"
     plt.title(title)
@@ -190,12 +215,12 @@ class Doctor():
     def change_treatment(self, t, treatment):
         self.simulation.treatments[t, :] = treatment
 
-    def greedy_proportion(self, magnitude=1.0):
+    def greedy_fittest(self, magnitude=1.0):
         fittest_subclone = self.simulation.subclones[np.argmax([f.fitness for f in self.simulation.subclones])]
         sus_drug = np.argmax(fittest_subclone.alpha)
         treatment = np.zeros(self.num_drugs)
         treatment[sus_drug] = magnitude
-        self.change_treatment(self.simulation.t + 1, treatment)
+        self.change_treatment(self.simulation.t, treatment)
 
 
 
