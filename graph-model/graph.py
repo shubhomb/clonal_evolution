@@ -16,7 +16,7 @@
 '''
 import numpy as np
 import matplotlib.pyplot as plt
-
+import networkx as nx
 
 class Colony():
     """
@@ -57,11 +57,14 @@ class Graph():
         In particular, this contains functions capable of accessing a node,
         its neighbors, removing the contained object, and storing a new object
         in its place.
+        
+        We have two representations
 
+        - A networkx graph instance
 
-        We represent the graph as an adjacency list.
-        The graph is a mapping such that: map[node] = [list of neighbor nodes]
-        where [list of neighbor nodes] contains element tuples (edgeweight, node)
+        -   We represent the graph as an adjacency list.
+            The graph is a mapping such that: map[node] = [list of neighbor nodes]
+            where [list of neighbor nodes] contains element tuples (edgeweight, node)
 
         We choose this design for quick lookup for doctor treatment.
     """
@@ -72,6 +75,21 @@ class Graph():
             print(f'Node: {node.debug()} obj: {node}: ')
             for neighbor, weight in self.pointmap[node]:
                 print(f'\t {neighbor} with weight {weight}')
+
+    def get_networkx_graph(self):
+        G = nx.Graph()
+        G.add_nodes_from(self.all_nodes)
+        G.add_weighted_edges_from(self.all_edges)
+        return G
+
+    def plot(self):
+        import matplotlib.pyplot as plt
+        G = self.get_networkx_graph()
+        nx.draw(G)
+        plt.savefig('Graph Plot.png')
+
+
+
 
     def __init__(self, env):
         """
@@ -85,6 +103,7 @@ class Graph():
         """
         self.pointmap = {} # map[node] = [(node, weight), (node2, eweight), ..]
         self.all_nodes = []
+        self.all_edges = [] # (node1, node2, weight) -- For printing
         #  Initialize all nodes
         for (name, neigh, alpha, prop)  in zip(env.names, env.relations, env.alpha, env.prop):
             new_colony = Colony(name, neigh, alpha, prop)
@@ -98,8 +117,9 @@ class Graph():
             neighbor_list = [] #tuples (weight, node) list
             # Iterate through all neighbors and add nonzero ones to list
             for neighbor_weight in neigh:
-                if neighbor_weight > 0:
+                if neighbor_weight > 0 and curr != ptr:
                     neighbor_list.append((neighbor_weight, self.all_nodes[curr])) 
+                    self.all_edges.append((self.all_nodes[ptr], self.all_nodes[curr], neighbor_weight))
                 curr += 1
             self.pointmap[self.all_nodes[ptr]] = neighbor_list
             ptr+=1
