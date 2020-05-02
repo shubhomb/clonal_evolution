@@ -1,4 +1,3 @@
-from graph import graph
 import json
 
 def parse_json(path_to_file):

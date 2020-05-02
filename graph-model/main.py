@@ -76,8 +76,9 @@ if __name__ == "__main__":
     # Make environment
     env = Environment(names, relations, alphas, props)
     
-    
+    graph = Graph(env)
+
     # Let doctor prescribe every 5 time intervals
     doctor_num_treatments = 5 
-    # Adjacency matrix representation of subclone population
+    
     

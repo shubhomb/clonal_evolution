@@ -27,7 +27,7 @@ class Colony():
             - Alpha 
             - Relative Proportion
     """
-    def __init__(self, name, relation, alpha, prop)
+    def __init__(self, name, relation, alpha, prop):
         self.name = name 
         self.relation = relation
         self.alpha = alpha
@@ -48,6 +48,8 @@ class Node():
     def treatment(self):
         # TODO
         pass
+    def debug(self):
+        return self.colony.name
 
 class Graph():
     """
@@ -63,8 +65,54 @@ class Graph():
 
         We choose this design for quick lookup for doctor treatment.
     """
-    def __init__(self, dims):
-        self.pointmap = {}
+
+    def debug(self):
+        """ Prints debug information  """
+        for node in self.pointmap:
+            print(f'Node: {node.debug()} obj: {node}: ')
+            for neighbor, weight in self.pointmap[node]:
+                print(f'\t {neighbor} with weight {weight}')
+
+    def __init__(self, env):
+        """
+            Given environment object consisting of:
+                - names  (list): names of subclone colony
+                - relations (matrix): adj matrix representing relations
+                - alpha  (list) : of corresponding alpha constants 
+                - prop  (list) : of corresponding initial proportions
+
+        Initializes a graph instance
+        """
+        self.pointmap = {} # map[node] = [(node, weight), (node2, eweight), ..]
+        self.all_nodes = []
+        #  Initialize all nodes
+        for (name, neigh, alpha, prop)  in zip(env.names, env.relations, env.alpha, env.prop):
+            new_colony = Colony(name, neigh, alpha, prop)
+            new_node = Node(new_colony, 0, [(None, None)])
+            self.pointmap[new_node] = [(None, None)]
+            self.all_nodes.append(new_node)  
+        # Add edges -- hacky way -- can make cleaner:
+        ptr = 0 # current node exploring
+        for (name, neigh)  in zip(env.names, env.relations):
+            curr = 0 #pointer to each neighbor
+            neighbor_list = [] #tuples (weight, node) list
+            # Iterate through all neighbors and add nonzero ones to list
+            for neighbor_weight in neigh:
+                if neighbor_weight > 0:
+                    neighbor_list.append((neighbor_weight, self.all_nodes[curr])) 
+                curr += 1
+            self.pointmap[self.all_nodes[ptr]] = neighbor_list
+            ptr+=1
+        
+        
+        
+    
+        
+
+
+
+        
+
         
 
     def add_node(self, node):
@@ -79,12 +127,19 @@ class Graph():
         """ Returns distance between two nodes (sum of shortest edge path) """
         pass
 
+
     def apply_medicine(self, target_node, depth):
         """
             TODO: 
             Applies treatment to each node within depth [depth]
         """
-        pass
+        raise NotImplementedError
+        if depth <= 0:
+            return
+        for (neighbor, weight) in self.pointmap[target_node]:
+            continue
+
+        
 
     def nearest_neighbors(self, x1):
         """ Returns the Node and weight corresponding to the nearest neighbor """
