@@ -89,7 +89,6 @@ if __name__ == "__main__":
     sim = Simulation(env, graph, MAX_TIME)
     for t in range(MAX_TIME):
         sim.evolve()
-        break
     
 
 

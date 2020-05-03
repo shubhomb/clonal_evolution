@@ -28,10 +28,20 @@ class Colony():
             - Relative Proportion
     """
     def __init__(self, name, relation, alpha, prop):
-        self.name = name 
-        self.relation = relation
+        self.name = name       #'drugA' for example 
+        self.relation = relation    
         self.alpha = alpha
         self.prop = prop
+    
+    def get_colony_info(self):
+        return (self.name, self.relation, self.alpha, self.prop)
+    
+    def update_alpha(self, newalpha):
+        self.alpha = newalpha
+    
+    def update_prop(self, newprop):
+        self.prop = newprop
+
 
 class Node():
     """
@@ -42,9 +52,19 @@ class Node():
     """
     def __init__(self, colony, birth_time, edges):
         # TODO add assertions to verify edges input
-        self.colony = colony
-        self.birth_time = birth_time
+        self.colony = colony # Colony Info
+        self.birth_time = birth_time #birth_time
         self.edges = edges  # [(node, edge_weight), (node2, edge_weight), ...]
+
+    def get_node_info(self):
+        """ Return attributes """
+        return (self.colony, self.birth_time, self.edges)
+    
+    def update_colony(self, newalpha, newprop):
+        self.colony.alpha = newalpha
+        self.colony.prop = newprop
+
+
     def treatment(self):
         # TODO
         pass
@@ -61,6 +81,7 @@ class Node():
         print(f'\t \t Colony name: {self.colony.name}')
         print(f'\t \t Alpha: {self.colony.alpha}')
         print(f'\t \t Prop: {self.colony.prop}')
+    
 
         
 
@@ -153,19 +174,6 @@ class Graph():
         self.nxgraph.add_weighted_edges_from(self.all_edges)
 
 
-    def add_node(self, node):
-        """
-            Adds a node to the graph
-            :param node (Node): node to add to graph
-        """ 
-        self.pointmap[node] = node.edges
-
-
-    def distance(self, x1, x2):
-        """ Returns distance between two nodes (sum of shortest edge path) """
-        pass
-
-
     def apply_medicine(self, target_node, depth):
         """
             TODO: 
@@ -175,20 +183,13 @@ class Graph():
         if depth <= 0:
             return
         for (neighbor, weight) in self.pointmap[target_node]:
-            continue
-
-        
+            continue        
 
     def nearest_neighbors(self, x1):
         """ Returns the Node and weight corresponding to the nearest neighbor """
         out_edges = x1.edges
         return min(data, key = lambda t: t[0])
                  
-    def spawn_mutant(self):
-        """ Adds bunch of neighboring nodes with small weight. """
-        pass
-
-
     def display(self, title):
         """ Stale for d > 3 """
         if self.d == 2:
