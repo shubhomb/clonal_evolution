@@ -48,8 +48,21 @@ class Node():
     def treatment(self):
         # TODO
         pass
+    
     def debug(self):
         return self.colony.name
+    
+    def log(self):
+        print(f'Node: {self.debug()}')
+        print(f'\t Birthtime: {self.birth_time}')
+        print(f'\t Edges' + "*-"*10)
+        for edge in self.edges:
+            print(f'\t --> {edge[1].colony.name} {edge[1]} with weight {edge[0]}')
+        print(f'\t \t Colony name: {self.colony.name}')
+        print(f'\t \t Alpha: {self.colony.alpha}')
+        print(f'\t \t Prop: {self.colony.prop}')
+
+        
 
 class Graph():
     """
@@ -69,7 +82,7 @@ class Graph():
         We choose this design for quick lookup for doctor treatment.
     """
 
-    def debug(self):
+    def log(self):
         """ Prints debug information  """
         for node in self.pointmap:
             print(f'Node: {node.debug()} obj: {node}: ')
@@ -98,18 +111,27 @@ class Graph():
                 - relations (matrix): adj matrix representing relations
                 - alpha  (list) : of corresponding alpha constants 
                 - prop  (list) : of corresponding initial proportions
+            
+            Has attributes:
+                - Point map (dict): mapping from node to its neighbors
+                - all_nodes (list): list of all nodes
+                - all_edges  (list): list of all edgs
+                - networkx_graph (networkx graph):
 
         Initializes a graph instance
         """
         self.pointmap = {} # map[node] = [(node, weight), (node2, eweight), ..]
-        self.all_nodes = []
-        self.all_edges = [] # (node1, node2, weight) -- For printing
+        self.all_nodes = [] # [Node1, Node2, ... ]
+        self.all_edges = [] # [(node1, node2, weight), ...] -- For printing
+        self.nxgraph = nx.Graph()
+
         #  Initialize all nodes
         for (name, neigh, alpha, prop)  in zip(env.names, env.relations, env.alpha, env.prop):
             new_colony = Colony(name, neigh, alpha, prop)
             new_node = Node(new_colony, 0, [(None, None)])
             self.pointmap[new_node] = [(None, None)]
             self.all_nodes.append(new_node)  
+
         # Add edges -- hacky way -- can make cleaner:
         ptr = 0 # current node exploring
         for (name, neigh)  in zip(env.names, env.relations):
@@ -122,24 +144,20 @@ class Graph():
                     self.all_edges.append((self.all_nodes[ptr], self.all_nodes[curr], neighbor_weight))
                 curr += 1
             self.pointmap[self.all_nodes[ptr]] = neighbor_list
+            self.all_nodes[ptr].edges = neighbor_list
+            
+
             ptr+=1
         
-        
-        
-    
-        
+        self.nxgraph.add_nodes_from(self.all_nodes)
+        self.nxgraph.add_weighted_edges_from(self.all_edges)
 
-
-
-        
-
-        
 
     def add_node(self, node):
         """
             Adds a node to the graph
             :param node (Node): node to add to graph
-        """
+        """ 
         self.pointmap[node] = node.edges
 
 

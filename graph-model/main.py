@@ -37,20 +37,28 @@ class Environment():
         items = [f' -->  {d}' for d in zip(self.names, self.alpha, self.prop)]
         for i in items:
             print(i)
+        print(20*'-*')
     
     def get_env_data(self):
         return [d for d in zip(self.names, self.alpha, self.prop)]    
 
 
 class Simulation():
-    def __init__(self, env, timesteps):
-        self.t = 0
-        self.max_timesteps = timesteps
+    def __init__(self, env, graph, MAX_TIME, debug=False):
         self.env = env
+        self.graph = graph
+        self.MAX_TIME = MAX_TIME
+        self.debug = debug
+        
+    def printsim(self):
+        self.env.log()
+        self.graph.log()
+        self.graph.nxgraph
+        print(self.MAX_TIME)
 
 
     def evolve(self):
-        """ Takes in graph and returns new graph with adjusted parameters """                
+        """ Takes in graph and evolves graph """                
         pass
     
 
@@ -77,6 +85,14 @@ if __name__ == "__main__":
     env = Environment(names, relations, alphas, props)
     
     graph = Graph(env)
+
+    sim = Simulation(env, graph, MAX_TIME)
+    for t in range(MAX_TIME):
+        sim.evolve()
+        break
+    
+
+
 
     # Let doctor prescribe every 5 time intervals
     doctor_num_treatments = 5 
