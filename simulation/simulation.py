@@ -1,58 +1,14 @@
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from datetime import datetime
 import os
-from scipy.optimize import *
-import json
+import numpy as np
+from datetime import datetime
+import matplotlib.pyplot as plt
 
 
-class Subclone:
-    """
-        Initializes a Subclone Population.
-        :attr label:    Either A, B or S
-        :attr fitness:  Current fitness
-        :attr prop:     Current Proportion
-    """
+from subclone import Subclone
+from doctor import Doctor
+from payoff_matrix import PayoffMatrix
 
-    def __init__(self, lbl, c, alpha, prop=0.333):
-        self.label = lbl
-        self.fitness = 1.0
-        self.prop = prop
-        self.c = c
-        self.alpha = alpha
 
-    def __str__(self):
-        return self.label
-
-    def update_fitness(self, treatment):
-        """
-        Returns the fitness with the given environment for subclone [type]
-        @ param treatment: 1d np.ndarray of shape (num_treatments) for intensity of treatment
-        """
-        self.fitness = 1 - self.c - np.dot(self.alpha, treatment)
-        return self.fitness
-
-class PayoffMatrix():
-    def __init__(self, sim):
-        self.sim = sim
-        self.matrix = np.zeros(shape=(len(self.sim.subclones), len(self.sim.subclones)))
-        self.populate_matrix(self.sim.t)
-
-    def populate_matrix(self, t):
-        treatments = self.sim.treatments[t, :]
-        for i in range(len(self.sim.subclones)):
-            for j in range(len(self.sim.subclones)):
-                fj = np.dot(self.sim.subclones[j].alpha, treatments)
-                fi = np.dot(self.sim.subclones[i].alpha, treatments)
-                # print (self.sim.subclones[j].alpha)
-                # print (treatments)
-                self.matrix[i, j] = fi - fj
-
-    def print_matrix(self):
-        labs = [s.label for s in self.sim.subclones]
-        self.pretty_matrix = pd.DataFrame(self.matrix, index=labs, columns=labs)
-        print (self.pretty_matrix)
 class Simulation:
     """
         Simulation Class contains relevant methods to simulate the evolution
@@ -80,7 +36,11 @@ class Simulation:
         """
         avg_fit = self.calc_avg_fitness()
         for c in self.subclones:
-            c.prop *= c.fitness / avg_fit
+            c.prop *= (c.fitness / avg_fit)
+
+            # ensure proportion can't surpass 1
+            c.prop = min(c.prop, 1)
+            c.prop = max(c.prop, 0)
 
 
     def calc_avg_fitness(self):
@@ -92,7 +52,6 @@ class Simulation:
     def run_step(self):
         for c in self.subclones:
             c.update_fitness(self.treatments[self.t, :])
-
         if self.t < self.num_timesteps:
             self.t += 1
         else:
@@ -100,7 +59,7 @@ class Simulation:
         return  self.calc_avg_fitness()
 
 
-def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, doc_times=None):
+def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, strat_profile, doc_times=None, dirname=None):
     '''
 
     :param max_time (int): The number of timesteps to consider
@@ -123,10 +82,14 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
     log_fitness = np.zeros(shape=(MAX_TIME, len(subclones)))
     log_props = np.zeros(shape=(MAX_TIME, len(subclones)))
     log_avg_fitness = np.zeros(shape=(MAX_TIME))
-
+    avg = model.calc_avg_fitness()
     for t in range(MAX_TIME):
+        log_fitness[t, :] = np.array([c.fitness for c in model.subclones])
+        log_props[t, :] = np.array([c.prop for c in model.subclones])
+        log_avg_fitness[t] = avg
+
         if doc_times[t]:
-            doc.greedy_fittest()
+            strat_profile(doc) # perform doctor action according to predefined strategy profile (allows randomness)
         matx = PayoffMatrix(model)
         if t == 0 or t == 2:
             matx.print_matrix()
@@ -134,12 +97,9 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
         avg = model.run_step()
         # Adjust Proportion
         model.adjust_proportion()
-        log_fitness[t, :] = np.array([c.fitness for c in model.subclones])
-        log_props[t, :] = np.array([c.prop for c in model.subclones])
-        log_avg_fitness[t] = avg
-
     savedir = os.path.join(os.path.split(os.getcwd())[0], "data", "simulations")
-    dirname = str(datetime.today().date()).replace("-", "_") + "_0"
+    if not dirname:
+        dirname = str(datetime.today().date()).replace("-", "_") + "_0"
     i = 1
     while os.path.exists(os.path.join(savedir, dirname)):
         dirname = dirname[:-2] + "_%d"%i
@@ -157,6 +117,8 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
     np.save(os.path.join(full_dir, "params", "cs.npy"), cs)
     np.save(os.path.join(full_dir, "params", "treatments.npy"), treatments)
 
+    with open(os.path.join(full_dir, "params", "params.txt"), "w+") as f:
+        f.write("alpha: \n " + str(alphas) + " \ncs:" + str(cs) + "\ntreatments:" + str(treatments))
 
 
     # Plot Resulting Curves
@@ -202,30 +164,6 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
     plt.show()
 
 
-
-
-
-
-
-class Doctor():
-    def __init__(self, simulation):
-        self.simulation = simulation
-        self.num_drugs = simulation.treatments.shape[1]
-
-    def change_treatment(self, t, treatment):
-        self.simulation.treatments[t, :] = treatment
-
-    def greedy_fittest(self, magnitude=1.0):
-        fittest_subclone = self.simulation.subclones[np.argmax([f.fitness for f in self.simulation.subclones])]
-        sus_drug = np.argmax(fittest_subclone.alpha)
-        treatment = np.zeros(self.num_drugs)
-        treatment[sus_drug] = magnitude
-        self.change_treatment(self.simulation.t, treatment)
-
-
-
-
-
 if __name__ == "__main__":
     MAX_TIME = 100
     num_treatments = 2
@@ -237,14 +175,17 @@ if __name__ == "__main__":
     #     else:
     #         treatments[t, 1] = np.random.uniform(0.5, 1.0)
 
-    subclones = [Subclone(lbl="A",c=0.03, alpha=[0.05, 1.1], prop=0.05),
-                 Subclone(lbl="B", c=0.03, alpha=[1.1, 0.03], prop=0.05),
-                 Subclone(lbl="S", c=0.0, alpha=[1.0, 1.0], prop=0.9),
+    subclones = [Subclone(lbl="A",c=0.03, alpha=[0.1, 2.2], prop=0.05),
+                 Subclone(lbl="B", c=0.03, alpha=[1.1, 0.05], prop=0.05),
+                 Subclone(lbl="S", c=0.01, alpha=[0.8, 0.7], prop=0.9),
                  ]
     tnames = ["Drug A", "Drug B"]
 
     # Let doctor prescribe every 5 time intervals
     dt = np.zeros(MAX_TIME)
-    dt[::5] = 1
-    run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames,doc_times=dt)
+    dt[::10] = 1
+
+    # define a strategy profile for doctor to decide actions online
+    s = lambda doc: doc.greedy_prop(magnitude=1.0)
+    run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames, strat_profile=s, doc_times=dt, dirname="greedy_prop")
 
