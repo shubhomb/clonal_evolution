@@ -61,7 +61,7 @@ class Node():
         # TODO
         # W(v) = 1 - (cost of resis) - alpha*d_A(t) + (1-PA)X(T)
         self.fitness = max(0, 1 - 0.3 - self.colony.alpha*0.3 + (1-self.colony.prop)*0.1)
-
+    
     def get_node_info(self):
         """ Return attributes """
         return (self.colony, self.birth_time, self.edges)
@@ -127,7 +127,7 @@ class Graph():
 
 
 
-    def plot(self, fitness=False):
+    def plot(self, title, fitness=False):
         import matplotlib.pyplot as plt
         G = self.get_networkx_graph()
         pos = nx.spring_layout(G)
@@ -147,8 +147,8 @@ class Graph():
 
         fit = {n: f'fitness: {n.fitness}' for n in self.all_nodes}
         nx.draw_networkx_labels(G, pos=pos_higher, font_size=10, font_color='black', labels=fit)
-
-        plt.savefig('Graph Plot.png')
+        plt.savefig(f'plots/Plot time {title}.png')
+        plt.close()
 
 
 

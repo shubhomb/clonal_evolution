@@ -66,6 +66,13 @@ class Simulation():
             total += node.fitness
         self.graph.avgfitness =  total / (len(self.graph.nxgraph.nodes))
 
+    def update_proportion(self):
+        """
+            Update each colony's proportions AFTER update_fitness(self)
+            is run.
+        """
+        for node in self.graph.nxgraph.nodes:
+            node.prop *= (node.fitness ) / (self.graph.avgfitness)
 
     def doctor(self):
         """ 
@@ -96,7 +103,7 @@ if __name__ == "__main__":
     """
         Begins simulation
     """
-    MAX_TIME = 1
+    MAX_TIME = 3
     num_treatments = 2
     treatments = np.zeros(shape=(MAX_TIME, num_treatments))
 
@@ -119,7 +126,7 @@ if __name__ == "__main__":
     sim = Simulation(env, graph, MAX_TIME)
     for t in range(MAX_TIME):
         print('-'*10 + f'SIMULATION TIME {t}' + '-'*10)
-        sim.graph.plot(fitness=True)
+        sim.graph.plot(t, fitness=True)
         sim.update_fitness()
         sim.evolve() # Want to pass in doctor strategy 
 
