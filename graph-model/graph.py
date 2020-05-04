@@ -32,6 +32,7 @@ class Colony():
         self.relation = relation    
         self.alpha = alpha
         self.prop = prop
+        self.resistant_to_med = False # [True] if resistant to current drug
     
     def get_colony_info(self):
         return (self.name, self.relation, self.alpha, self.prop)
@@ -60,7 +61,13 @@ class Node():
     def update_fitness(self):
         # TODO
         # W(v) = 1 - (cost of resis) - alpha*d_A(t) + (1-PA)X(T)
-        self.fitness = max(0, 1 - 0.3 - self.colony.alpha*0.3 + (1-self.colony.prop)*0.1)
+        
+        cost_of_resis = 0.3
+        alpha_medicine = self.colony.alpha*self.colony.resistant_to_med
+        third_term = 0.3
+
+        fitness = max(0, 1 - cost_of_resis - alpha_medicine - third_term )
+        self.fitness = fitness
     
     def get_node_info(self):
         """ Return attributes """
@@ -81,12 +88,12 @@ class Node():
     def log(self):
         print(f'Node: {self.debug()}')
         print(f'\t Birthtime: {self.birth_time}')
-        print(f'\t Edges' + "*-"*10)
-        for edge in self.edges:
-            print(f'\t --> {edge[1].colony.name} {edge[1]} with weight {edge[0]}')
-        print(f'\t \t Colony name: {self.colony.name}')
+        # print(f'\t Edges' + "*-"*10)
+        # for edge in self.edges:
+            # print(f'\t --> {edge[1].colony.name} {edge[1]} with weight {edge[0]}')
         print(f'\t \t Alpha: {self.colony.alpha}')
         print(f'\t \t Prop: {self.colony.prop}')
+        print(f'\t \t Resistant: {self.colony.resistant_to_med}')
         print(f'\t \t Fitness: {self.fitness}')
         
     
@@ -136,6 +143,8 @@ class Graph():
         
         # Create edge label Dictionary to label edges:
         edge_labels = nx.get_edge_attributes(G,'weight')
+        
+
         nx.draw_networkx_edge_labels(G, pos, labels = edge_labels)
 
         # -------- Draw fitness labels above -----
@@ -210,25 +219,39 @@ class Graph():
         self.nxgraph.add_weighted_edges_from(self.all_edges)
 
 
-    def apply_medicine(self, target_node, depth):
+    def apply_medicine(self, target_node, depth, debug=False):
         """
-            TODO: 
-            Applies treatment to each node within depth [depth]
+            Applies treatment to each node within depth [depth] by
+            updating the dA parameter for each node .
         """
-        nodes = nx.ego_graph(self.nxgraph, target_node, depth, center=False, undirected=True, distance='weight')
-        print(f'Considering nodes: ')
-        for curr in nodes:
-            print(curr.colony.name)
+        if debug:
+            print('Applying medicine to nodes....')
+        target_nodes = nx.ego_graph(self.nxgraph, target_node, depth, center=True, undirected=True, distance='weight')
+        if debug:
+            print(f'Considering a total of {len(target_nodes)} nodes: ')
+        for curr in target_nodes:
+            if debug:
+                print(f'Targeting: {curr.colony.name}')
+        
 
-             
-            
+        for node in self.nxgraph.nodes:
+            if node not in target_nodes:
+                node.colony.resistant_to_med = True
+                if debug:
+                    print(f'resistant: {node.colony.name}')
+            else:
+                node.colony.resistant_to_med = False
+                if debug:
+                    print(f'not resistant: {node.colony.name}')
+        if debug:
+            print(f'Updated dA parameters:')
 
-    def nearest_neighbors(self, x1):
-        """ Returns the Node and weight corresponding to the nearest neighbor """
-        out_edges = x1.edges
-        return min(data, key = lambda t: t[0])
+        
 
 
+
+
+# Stale
 if __name__ == "__main__":
     coord1 = np.array([0, 1, 0])
     progenitor = Node("origin", 0, coord1)

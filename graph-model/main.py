@@ -72,7 +72,7 @@ class Simulation():
             is run.
         """
         for node in self.graph.nxgraph.nodes:
-            node.prop *= (node.fitness ) / (self.graph.avgfitness)
+            node.colony.prop *= (node.fitness ) / (self.graph.avgfitness)
 
     def doctor(self):
         """ 
@@ -81,9 +81,14 @@ class Simulation():
         Returns target node
         """
         DEPTH = 1
-        set_nodes = nx.maximal_independent_set(sim.graph.nxgraph)
-        
-        return set_nodes[0]
+        # target_node = nx.maximal_independent_set(sim.graph.nxgraph)[0]
+
+        all_degrees = list(self.graph.nxgraph.degree(self.graph.all_nodes, weight='weight'))
+
+        print(all_degrees)
+        target_node = max(all_degrees, key=lambda item:item[1])[0]
+
+        return target_node
 
 
     def evolve(self):
@@ -91,10 +96,11 @@ class Simulation():
         """                
         target_node = self.doctor()
         print(f'Target Node: {target_node.colony.name}')
-        self.graph.apply_medicine(target_node, 0.9)
+        self.graph.apply_medicine(target_node, 0.9, debug=True)
         
 
     def log(self):
+        print('Model parameters:')
         for node in self.graph.nxgraph.nodes():
             node.log()
     
@@ -103,7 +109,7 @@ if __name__ == "__main__":
     """
         Begins simulation
     """
-    MAX_TIME = 3
+    MAX_TIME = 4
     num_treatments = 2
     treatments = np.zeros(shape=(MAX_TIME, num_treatments))
 
@@ -124,12 +130,22 @@ if __name__ == "__main__":
     
 
     sim = Simulation(env, graph, MAX_TIME)
-    for t in range(MAX_TIME):
-        print('-'*10 + f'SIMULATION TIME {t}' + '-'*10)
-        sim.graph.plot(t, fitness=True)
-        sim.update_fitness()
-        sim.evolve() # Want to pass in doctor strategy 
 
+    # Model parameters at time t = 0
+    print('-'*10 + f'SIMULATION TIME 0' + '-'*10)
+    sim.graph.plot(0, fitness=True)
+    sim.log()
+
+    for t in range(1, MAX_TIME):
+        print('-'*10 + f'SIMULATION TIME {t}' + '-'*10)
+        
+        sim.evolve() # Evolve using specified Doctor's strategy
+        sim.update_fitness()  #Update fitness   
+        sim.update_proportion() # Update proportion  MUST BE AFTER FITNESS 
+        # gives visual
+        sim.graph.plot(t, fitness=True)
+        
+        sim.log() # Log data
 
     # Let doctor prescribe every 5 time intervals
     doctor_num_treatments = 5 
