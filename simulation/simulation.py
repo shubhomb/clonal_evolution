@@ -59,7 +59,7 @@ class Simulation:
         return  self.calc_avg_fitness()
 
 
-def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, strat_profile, doc_times=None, dirname=None):
+def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, strat_profile, doc_times=None, distro=None, dirname=None):
     '''
 
     :param max_time (int): The number of timesteps to consider
@@ -89,7 +89,9 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, st
         log_avg_fitness[t] = avg
 
         if doc_times[t]:
-            strat_profile(doc) # perform doctor action according to predefined strategy profile (allows randomness)
+            strat = strat_profile(distro) # perform doctor action according to predefined strategy profile (allows randomness)
+            print (strat)
+            strat(doc)
         matx = PayoffMatrix(model)
         if t == 0 or t == 2:
             matx.print_matrix()
@@ -185,7 +187,20 @@ if __name__ == "__main__":
     dt = np.zeros(MAX_TIME)
     dt[::10] = 1
 
+    magnitude = 0
     # define a strategy profile for doctor to decide actions online
-    s = lambda doc: doc.greedy_prop(magnitude=1.0)
-    run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames, strat_profile=s, doc_times=dt, dirname="greedy_prop")
+    strats = [lambda doc: doc.greedy_propweighted_fitness(magnitude=1.0),
+              lambda doc: doc.greedy_prop(magnitude=1.0),
+              lambda doc: doc.greedy_fitness(magnitude=1.0)
+              ]
+    def mixed_strategy(distro):
+        strats = [lambda doc: doc.greedy_propweighted_fitness(magnitude=1.0),
+                  lambda doc: doc.greedy_prop(magnitude=1.0),
+                  lambda doc: doc.greedy_fittest(magnitude=1.0)
+                  ]
+        strat = np.random.choice(strats, 1, p=distro)[0]
+        return strat
+    distro = [1/3, 1/3, 1/3]
+    run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames, doc_times=dt,
+            strat_profile=mixed_strategy, distro=distro, dirname="greedy_equiv_random")
 

@@ -1,6 +1,7 @@
 import numpy as np
 
 class Doctor():
+
     def __init__(self, simulation):
         self.simulation = simulation
         self.num_drugs = simulation.treatments.shape[1]
