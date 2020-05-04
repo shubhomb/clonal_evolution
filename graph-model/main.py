@@ -83,14 +83,9 @@ class Simulation():
         """ Takes in graph and evolves graph using doctor strategy
         """                
         target_node = self.doctor()
-        print(f'Target Node: {target_node}')
-        self.graph.apply_medicine(target_node, 0.2)
+        print(f'Target Node: {target_node.colony.name}')
+        self.graph.apply_medicine(target_node, 0.9)
         
-
-        
-
-
-
 
     def log(self):
         for node in self.graph.nxgraph.nodes():
@@ -123,11 +118,10 @@ if __name__ == "__main__":
 
     sim = Simulation(env, graph, MAX_TIME)
     for t in range(MAX_TIME):
-        sim.graph.plot()
+        print('-'*10 + f'SIMULATION TIME {t}' + '-'*10)
+        sim.graph.plot(fitness=True)
         sim.update_fitness()
         sim.evolve() # Want to pass in doctor strategy 
-
-
 
 
     # Let doctor prescribe every 5 time intervals

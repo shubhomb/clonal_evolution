@@ -124,7 +124,10 @@ class Graph():
         G.add_weighted_edges_from(self.all_edges)
         return G
 
-    def plot(self):
+
+
+
+    def plot(self, fitness=False):
         import matplotlib.pyplot as plt
         G = self.get_networkx_graph()
         pos = nx.spring_layout(G)
@@ -134,6 +137,16 @@ class Graph():
         # Create edge label Dictionary to label edges:
         edge_labels = nx.get_edge_attributes(G,'weight')
         nx.draw_networkx_edge_labels(G, pos, labels = edge_labels)
+
+        # -------- Draw fitness labels above -----
+
+        pos_higher = {}
+        y_offset = 0.07 # Might have to play around with
+        for k, v in pos.items():
+            pos_higher[k] = (v[0], v[1] + y_offset)        
+
+        fit = {n: f'fitness: {n.fitness}' for n in self.all_nodes}
+        nx.draw_networkx_labels(G, pos=pos_higher, font_size=10, font_color='black', labels=fit)
 
         plt.savefig('Graph Plot.png')
 
@@ -202,10 +215,10 @@ class Graph():
             TODO: 
             Applies treatment to each node within depth [depth]
         """
-        sadf = nx.ego_graph(self.nxgraph, target_node, depth, center=False, undirected=True, distance='weight')
-        print(f'considering nodes ')
-        for i in sadf:
-            print(i)
+        nodes = nx.ego_graph(self.nxgraph, target_node, depth, center=False, undirected=True, distance='weight')
+        print(f'Considering nodes: ')
+        for curr in nodes:
+            print(curr.colony.name)
 
              
             
