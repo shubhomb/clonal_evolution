@@ -13,7 +13,7 @@
 
 import numpy as np
 import json
-from doctor import *
+import doctor
 from graph import *
 
 def parse_json(path_to_file):
@@ -56,28 +56,62 @@ class Simulation():
         self.graph.nxgraph
         print(self.MAX_TIME)
 
+    def update_fitness(self):
+        """
+            Updates each node's fitness and recalculates average fitness
+        """
+        total = 0
+        for node in self.graph.nxgraph.nodes:
+            node.update_fitness()
+            total += node.fitness
+        self.graph.avgfitness =  total / (len(self.graph.nxgraph.nodes))
+
+
+    def doctor(self):
+        """ 
+        Target maximum node and all nodes within some constant
+        
+        Returns target node
+        """
+        DEPTH = 1
+        set_nodes = nx.maximal_independent_set(sim.graph.nxgraph)
+        
+        return set_nodes[0]
+
 
     def evolve(self):
-        """ Takes in graph and evolves graph """                
-        pass
-    
+        """ Takes in graph and evolves graph using doctor strategy
+        """                
+        target_node = self.doctor()
+        print(f'Target Node: {target_node}')
+        self.graph.apply_medicine(target_node, 0.2)
+        
 
+        
+
+
+
+
+    def log(self):
+        for node in self.graph.nxgraph.nodes():
+            node.log()
+    
 
 if __name__ == "__main__":
     """
         Begins simulation
     """
-    MAX_TIME = 100
+    MAX_TIME = 1
     num_treatments = 2
     treatments = np.zeros(shape=(MAX_TIME, num_treatments))
 
     # Eventually put this into a json environment object
     names = ['drugA', 'drugB', 'drugC', 'drugD']
     relations = np.array([
-                    [1, 0.3, 0.4, 0.6],
-                    [1, 0.3, 0.4, 0.6],
-                    [1, 0.3, 0.4, 0.6],
-                    [1, 0.3, 0.4, 0.6]])
+                    [1, 0.3, 0, 0],
+                    [0.3, 1, 0.2, 0],
+                    [0, 0.2, 1, 0.8],
+                    [0, 0, 0.8, 1]])
     alphas = [0.3, 0.2, 0.3, 0.2]
     props = [0.25, 0.25, 0.25, 0.25]
 
@@ -85,11 +119,14 @@ if __name__ == "__main__":
     env = Environment(names, relations, alphas, props)
     
     graph = Graph(env)
+    
 
     sim = Simulation(env, graph, MAX_TIME)
     for t in range(MAX_TIME):
-        sim.evolve()
-    
+        sim.graph.plot()
+        sim.update_fitness()
+        sim.evolve() # Want to pass in doctor strategy 
+
 
 
 

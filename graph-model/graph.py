@@ -55,6 +55,12 @@ class Node():
         self.colony = colony # Colony Info
         self.birth_time = birth_time #birth_time
         self.edges = edges  # [(node, edge_weight), (node2, edge_weight), ...]
+        self.fitness = 0
+
+    def update_fitness(self):
+        # TODO
+        # W(v) = 1 - (cost of resis) - alpha*d_A(t) + (1-PA)X(T)
+        self.fitness = max(0, 1 - 0.3 - self.colony.alpha*0.3 + (1-self.colony.prop)*0.1)
 
     def get_node_info(self):
         """ Return attributes """
@@ -81,6 +87,8 @@ class Node():
         print(f'\t \t Colony name: {self.colony.name}')
         print(f'\t \t Alpha: {self.colony.alpha}')
         print(f'\t \t Prop: {self.colony.prop}')
+        print(f'\t \t Fitness: {self.fitness}')
+        
     
 
         
@@ -119,7 +127,14 @@ class Graph():
     def plot(self):
         import matplotlib.pyplot as plt
         G = self.get_networkx_graph()
-        nx.draw(G)
+        pos = nx.spring_layout(G)
+        # Plot graph with labels as specified by label_dict
+        nx.draw(G, pos, labels=self.label_dict, with_labels=True)
+        
+        # Create edge label Dictionary to label edges:
+        edge_labels = nx.get_edge_attributes(G,'weight')
+        nx.draw_networkx_edge_labels(G, pos, labels = edge_labels)
+
         plt.savefig('Graph Plot.png')
 
 
@@ -138,6 +153,8 @@ class Graph():
                 - all_nodes (list): list of all nodes
                 - all_edges  (list): list of all edgs
                 - networkx_graph (networkx graph):
+                - avg fitness
+                - label_dict (map) : Maps node to its name (for plotting)
 
         Initializes a graph instance
         """
@@ -145,6 +162,11 @@ class Graph():
         self.all_nodes = [] # [Node1, Node2, ... ]
         self.all_edges = [] # [(node1, node2, weight), ...] -- For printing
         self.nxgraph = nx.Graph()
+        self.avgfitness = 0
+
+        # Plotting purposes
+        self.label_dict = {}  # Maps node to name (for plotting purposes)
+        
 
         #  Initialize all nodes
         for (name, neigh, alpha, prop)  in zip(env.names, env.relations, env.alpha, env.prop):
@@ -152,6 +174,7 @@ class Graph():
             new_node = Node(new_colony, 0, [(None, None)])
             self.pointmap[new_node] = [(None, None)]
             self.all_nodes.append(new_node)  
+            self.label_dict[new_node] = name
 
         # Add edges -- hacky way -- can make cleaner:
         ptr = 0 # current node exploring
@@ -179,47 +202,18 @@ class Graph():
             TODO: 
             Applies treatment to each node within depth [depth]
         """
-        raise NotImplementedError
-        if depth <= 0:
-            return
-        for (neighbor, weight) in self.pointmap[target_node]:
-            continue        
+        sadf = nx.ego_graph(self.nxgraph, target_node, depth, center=False, undirected=True, distance='weight')
+        print(f'considering nodes ')
+        for i in sadf:
+            print(i)
+
+             
+            
 
     def nearest_neighbors(self, x1):
         """ Returns the Node and weight corresponding to the nearest neighbor """
         out_edges = x1.edges
         return min(data, key = lambda t: t[0])
-                 
-    def display(self, title):
-        """ Stale for d > 3 """
-        if self.d == 2:
-            f = plt.figure()
-            if title:
-                plt.title(title)
-            plt.xlabel("param1")
-            plt.ylabel("param2")
-            for k, v in self.points.items():
-                plt.scatter(v[0], v[1])
-                plt.annotate(k.name, (v[0], v[1]))
-            plt.show()
-        elif self.d == 3:
-            fig = plt.figure()
-            ax = fig.add_subplot(111, projection='3d')
-            if title:
-                ax.set_title(title)
-            ax.set_xlabel("param1")
-            ax.set_ylabel("param2")
-            ax.set_zlabel("param3")
-
-            for k, v in self.points.items():
-                ax.scatter(v[0], v[1], v[2], s=20)
-                ax.text(v[0], v[1], v[2], k.name, "x", fontsize=5)
-            plt.show()
-        else:
-            raise NotImplementedError("can't display graph with over 3 dimensions")
-
-
-
 
 
 if __name__ == "__main__":
