@@ -75,7 +75,7 @@ class Simulation():
         for node in self.graph.nxgraph.nodes:
             node.colony.prop *= (node.fitness ) / (self.graph.avgfitness)
 
-    def doctor(self):
+    def doctor(self, time):
         """ 
         Target maximum node and all nodes within some constant
         
@@ -83,15 +83,20 @@ class Simulation():
         """
         DEPTH = 0.1
         # target_node = nx.maximal_independent_set(sim.graph.nxgraph)[0]
-        all_degrees = list(self.graph.nxgraph.degree(self.graph.all_nodes, weight='weight'))
-        target_node = min(all_degrees, key=lambda item:item[1])[0]
+        # all_degrees = list(self.graph.nxgraph.degree(self.graph.all_nodes, weight='weight'))
+        # target_node = min(all_degrees, key=lambda item:item[1])[0]
+        if time < 10:
+            target_node = list(self.graph.nxgraph.nodes)[0]
+        else:
+            target_node = target_node = list(self.graph.nxgraph.nodes)[2]
+
         return target_node
 
 
-    def evolve(self):
+    def evolve(self, time):
         """ Takes in graph and evolves graph using doctor strategy
         """                
-        target_node = self.doctor()
+        target_node = self.doctor(time)
         print(f'Target Node: {target_node.colony.name}')
         self.graph.apply_medicine(target_node, 0.1, debug=True)
         
@@ -106,7 +111,7 @@ if __name__ == "__main__":
     """
         Begins simulation
     """
-    MAX_TIME = 10
+    MAX_TIME = 20
     num_treatments = 2
     treatments = np.zeros(shape=(MAX_TIME, num_treatments))
 
@@ -136,7 +141,7 @@ if __name__ == "__main__":
     for t in range(1, MAX_TIME):
         print('-'*10 + f'SIMULATION TIME {t}' + '-'*10)
         
-        sim.evolve() # Evolve using specified Doctor's strategy
+        sim.evolve(t) # Evolve using specified Doctor's strategy
         sim.update_fitness()  #Update fitness   
         sim.update_proportion() # Update proportion  MUST BE AFTER FITNESS 
         # gives visual
