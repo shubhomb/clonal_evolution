@@ -59,7 +59,7 @@ class Simulation:
         return  self.calc_avg_fitness()
 
 
-def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, strat_profile, doc_times=None, distro=None, dirname=None):
+def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, strat_profile, doc_times=None, distro=None, doc_decay=0, dirname=None):
     '''
 
     :param max_time (int): The number of timesteps to consider
@@ -76,9 +76,9 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, st
         raise ValueError("Treatment names and number of treatments should be same")
     if doc_times is None:
         doc_times = np.ones(shape=num_treatments)
-
+    stratlog = []
     model = Simulation(subclones, treatments)
-    doc = Doctor(model)
+    doc = Doctor(model, schedule=doc_times, decay=doc_decay)
     log_fitness = np.zeros(shape=(MAX_TIME, len(subclones)))
     log_props = np.zeros(shape=(MAX_TIME, len(subclones)))
     log_avg_fitness = np.zeros(shape=(MAX_TIME))
@@ -89,8 +89,9 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, st
         log_avg_fitness[t] = avg
 
         if doc_times[t]:
-            strat = strat_profile(distro) # perform doctor action according to predefined strategy profile (allows randomness)
-            print (strat)
+            stratname, strat= strat_profile(distro) # perform doctor action according to predefined strategy profile (allows randomness)
+            print (stratname)
+            stratlog.append(stratname)
             strat(doc)
         matx = PayoffMatrix(model)
         if t == 0 or t == 2:
@@ -120,7 +121,12 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, st
     np.save(os.path.join(full_dir, "params", "treatments.npy"), treatments)
 
     with open(os.path.join(full_dir, "params", "params.txt"), "w+") as f:
-        f.write("alpha: \n " + str(alphas) + " \ncs:" + str(cs) + "\ntreatments:" + str(treatments))
+        f.write("alpha: \n " + str(alphas) +
+                " \ncs:\n" + str(cs)
+                + "\ntreatments:\n"
+                + str(treatments)
+                + "\nstratlog: \n" + str(stratlog))
+
 
 
     # Plot Resulting Curves
@@ -186,21 +192,19 @@ if __name__ == "__main__":
     # Let doctor prescribe every 5 time intervals
     dt = np.zeros(MAX_TIME)
     dt[::10] = 1
-
+    np.random.seed(0)
     magnitude = 0
-    # define a strategy profile for doctor to decide actions online
-    strats = [lambda doc: doc.greedy_propweighted_fitness(magnitude=1.0),
-              lambda doc: doc.greedy_prop(magnitude=1.0),
-              lambda doc: doc.greedy_fitness(magnitude=1.0)
-              ]
+    # define a strategy profile for doctor to decide actionsE online
     def mixed_strategy(distro):
-        strats = [lambda doc: doc.greedy_propweighted_fitness(magnitude=1.0),
-                  lambda doc: doc.greedy_prop(magnitude=1.0),
-                  lambda doc: doc.greedy_fittest(magnitude=1.0)
-                  ]
-        strat = np.random.choice(strats, 1, p=distro)[0]
-        return strat
-    distro = [1/3, 1/3, 1/3]
+        if np.sum(distro) > 1:
+            raise ValueError("Distribution sum should add to 1")
+        strats = {"propweight": lambda doc: doc.greedy_propweighted_fitness(magnitude=1.0),
+                  "prop": lambda doc: doc.greedy_prop(magnitude=1.0),
+                  "fit": lambda doc: doc.greedy_fittest(magnitude=1.0)
+                  }
+        strat = np.random.choice(list(strats.keys()), 1, p=distro)[0]
+        return strat, strats[strat]
+    distro = [0.5, 0.4, 0.1]
     run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames, doc_times=dt,
-            strat_profile=mixed_strategy, distro=distro, dirname="greedy_equiv_random")
+            strat_profile=mixed_strategy, distro=distro, doc_decay=0.9, dirname="greedy_equiv_random_test")
 
