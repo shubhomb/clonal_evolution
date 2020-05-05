@@ -17,6 +17,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
+import pandas as pd
 
 class Colony():
     """
@@ -62,11 +63,11 @@ class Node():
         # TODO
         # W(v) = 1 - (cost of resis) - alpha*d_A(t) + (1-PA)X(T)
         
-        cost_of_resis = 0.3
-        alpha_medicine = self.colony.alpha*self.colony.resistant_to_med
+        cost_of_resis = 0.1
+        alpha_medicine = self.colony.alpha*(1 - self.colony.resistant_to_med)
         third_term = 0.3
 
-        fitness = max(0, 1 - cost_of_resis - alpha_medicine - third_term )
+        fitness = max(0, 1 - cost_of_resis - alpha_medicine)
         self.fitness = fitness
     
     def get_node_info(self):
@@ -76,11 +77,6 @@ class Node():
     def update_colony(self, newalpha, newprop):
         self.colony.alpha = newalpha
         self.colony.prop = newprop
-
-
-    def treatment(self):
-        # TODO
-        pass
     
     def debug(self):
         return self.colony.name
@@ -117,6 +113,26 @@ class Graph():
 
         We choose this design for quick lookup for doctor treatment.
     """
+
+
+    def get_data(self):
+        """
+            Returns pandas dataframe at current timestep
+        """
+        
+        all = []
+        for node in self.nxgraph.nodes:
+            dic = {
+                    'name': node.colony.name,
+                    'fitness': float(node.fitness),
+                    'prop': float(node.colony.prop),
+                  }
+            all.append(dic)
+        return pd.DataFrame(all)
+            
+            
+
+
 
     def log(self):
         """ Prints debug information  """
@@ -247,20 +263,3 @@ class Graph():
             print(f'Updated dA parameters:')
 
         
-
-
-
-
-# Stale
-if __name__ == "__main__":
-    coord1 = np.array([0, 1, 0])
-    progenitor = Node("origin", 0, coord1)
-    graph = Graph(dims=3)
-    graph.add_node(progenitor)
-
-    for t in range(100):
-        eps = np.random.normal(coord1.shape)
-        pt = np.random.choice(np.array(list(graph.points.keys())))
-        newnode = Node(str(t+1), t, graph.points[pt] + eps)
-        graph.add_node(newnode)
-    graph.display("random")
