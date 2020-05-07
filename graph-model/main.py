@@ -10,7 +10,7 @@
     parameters and we can watch the network evolve.  
 
 """
-
+import pandas as pd
 import numpy as np
 import json
 import doctor
@@ -63,8 +63,9 @@ class Simulation():
         total = 0
         for node in self.graph.nxgraph.nodes:
             node.update_fitness()
-            total += node.fitness
-        self.graph.avgfitness =  total / (len(self.graph.nxgraph.nodes))
+            total += node.colony.prop*node.fitness
+        
+        self.graph.avgfitness =  total
 
     def update_proportion(self):
         """
@@ -80,14 +81,10 @@ class Simulation():
         
         Returns target node
         """
-        DEPTH = 1
+        DEPTH = 0.1
         # target_node = nx.maximal_independent_set(sim.graph.nxgraph)[0]
-
         all_degrees = list(self.graph.nxgraph.degree(self.graph.all_nodes, weight='weight'))
-
-        print(all_degrees)
-        target_node = max(all_degrees, key=lambda item:item[1])[0]
-
+        target_node = min(all_degrees, key=lambda item:item[1])[0]
         return target_node
 
 
@@ -96,7 +93,7 @@ class Simulation():
         """                
         target_node = self.doctor()
         print(f'Target Node: {target_node.colony.name}')
-        self.graph.apply_medicine(target_node, 0.9, debug=True)
+        self.graph.apply_medicine(target_node, 0.1, debug=True)
         
 
     def log(self):
@@ -109,26 +106,23 @@ if __name__ == "__main__":
     """
         Begins simulation
     """
-    MAX_TIME = 4
+    MAX_TIME = 10
     num_treatments = 2
     treatments = np.zeros(shape=(MAX_TIME, num_treatments))
 
     # Eventually put this into a json environment object
-    names = ['drugA', 'drugB', 'drugC', 'drugD']
+    names = ['RA', 'S', 'RB']
     relations = np.array([
-                    [1, 0.3, 0, 0],
-                    [0.3, 1, 0.2, 0],
-                    [0, 0.2, 1, 0.8],
-                    [0, 0, 0.8, 1]])
-    alphas = [0.3, 0.2, 0.3, 0.2]
-    props = [0.25, 0.25, 0.25, 0.25]
+                    [1, 0.1, 0],
+                    [0.1, 1, 0.1],
+                    [0, 0.1, 1] ])
+                    
+    alphas = [0.3, 0.3, 0.3]
+    props = [0.33, 0.34, 0.33]
 
     # Make environment
     env = Environment(names, relations, alphas, props)
-    
     graph = Graph(env)
-    
-
     sim = Simulation(env, graph, MAX_TIME)
 
     # Model parameters at time t = 0
@@ -136,6 +130,9 @@ if __name__ == "__main__":
     sim.graph.plot(0, fitness=True)
     sim.log()
 
+    dataframes = []
+    df = sim.graph.get_data()
+    dataframes.append(df)
     for t in range(1, MAX_TIME):
         print('-'*10 + f'SIMULATION TIME {t}' + '-'*10)
         
@@ -144,10 +141,31 @@ if __name__ == "__main__":
         sim.update_proportion() # Update proportion  MUST BE AFTER FITNESS 
         # gives visual
         sim.graph.plot(t, fitness=True)
-        
-        sim.log() # Log data
+        sim.log() # Log data to console
 
-    # Let doctor prescribe every 5 time intervals
-    doctor_num_treatments = 5 
+        # Log dataframes for plotting
+        df = sim.graph.get_data()
+        dataframes.append(df)
+
+    print(f'logged{len(dataframes)} dataframes')
     
-    
+    # Plot Data Proportion
+    filtered = np.array(list(map(lambda x: list(x['prop']), dataframes)))
+    print(filtered)
+    xaxis = [i for i in range(MAX_TIME)]
+    plt.plot(xaxis, filtered)
+    plt.title('Proportion vs Time')
+    plt.legend(names)
+    plt.savefig('Proportion vs time.png')
+    plt.close()
+
+    # Plot Data Fitness
+    filtered = np.array(list(map(lambda x: list(x['fitness']), dataframes)))
+    print(filtered)
+    xaxis = [i for i in range(MAX_TIME)]
+    plt.plot(xaxis, filtered)
+    plt.title('Fitness vs Time')
+    plt.legend(names)
+    plt.savefig('Fitness vs time.png')
+    plt.close()
+
