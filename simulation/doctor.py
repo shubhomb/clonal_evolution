@@ -70,6 +70,7 @@ class Doctor():
         :return:
         """
         degs = [self.simulation.graph.nxgraph.degree(sc, weight="weight") for sc in self.simulation.subclones]
+        print (degs)
         affected_subclone = self.simulation.subclones[np.argmax(degs)]
         sus_drug = np.argmax(affected_subclone.alpha)
         treatment = np.zeros(self.num_drugs)

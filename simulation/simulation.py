@@ -40,7 +40,6 @@ class Simulation:
         avg_fit = self.calc_avg_fitness()
         for c in self.subclones:
             c.prop *= (c.fitness / avg_fit)
-
             # ensure proportion can't surpass 1
             c.prop = min(c.prop, 1)
             c.prop = max(c.prop, 0)
@@ -132,7 +131,7 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
     np.save(os.path.join(full_dir, "params", "alphas.npy"), alphas)
     np.save(os.path.join(full_dir, "params", "cs.npy"), cs)
     np.save(os.path.join(full_dir, "params", "treatments.npy"), treatments)
-    graph.plot(title="test", savefile=os.path.join(full_dir, "graph.png"))
+    graph.plot(title="Subclonal Graph", savefile=os.path.join(full_dir, "graph.png"))
 
     with open(os.path.join(full_dir, "params", "params.txt"), "w+") as f:
         f.write("alpha: \n " + str(alphas) +
@@ -203,7 +202,7 @@ if __name__ == "__main__":
                  Subclone(lbl="A.b", c=0.01, alpha=[0.11, 1.7], prop=0.01),
                  Subclone(lbl="A.c", c=0.03, alpha=[0.09, 2.1], prop=0.01),
                  Subclone(lbl="B.a", c=0.02, alpha=[1.12, 0.04], prop=0.01),
-                 Subclone(lbl="B.c", c=0.02, alpha=[1.08, 0.09], prop=0.01),
+                 Subclone(lbl="B.b", c=0.02, alpha=[1.08, 0.09], prop=0.01),
                  Subclone(lbl="S", c=0.01, alpha=[0.8, 0.7], prop=0.85),
                  ]
     tnames = ["Drug A", "Drug B"]
@@ -215,8 +214,19 @@ if __name__ == "__main__":
     magnitude = 0
     # define a strategy profile for doctor to decide actionsE online
     distro = np.array([0, 0.5, 0, 0.5])
-    adjacency_matx = np.eye(len(subclones))
+    adjacency_matx = np.zeros((len(subclones), len(subclones)))
+    for j in range(len(subclones)):
+        for k in range(len(subclones)):
+            if "A" in subclones[j].label and "A" in subclones[k].label:
+                adjacency_matx[j][k] = 0.9
+            elif "B" in subclones[j].label and "B" in subclones[k].label:
+                adjacency_matx[j][k] = 0.9
+            else:
+                pass
+
+    adjacency_matx *= 10
+
 
     run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames, doc_times=dt,
-            distro=distro, doc_decay=0.98, dirname="many_subclones", adj=adjacency_matx)
+            distro=distro, doc_decay=0.98, dirname="many_subclones_cluster", adj=adjacency_matx)
 

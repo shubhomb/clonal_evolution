@@ -88,10 +88,13 @@ class Graph():
             weights = self.sim.adj[j, :]
             if not self.sim.subclones[j] in self.nxgraph.nodes:
                 self.nxgraph.add_node(self.sim.subclones[j], name=self.sim.subclones[j].label)
-            if self.sim.subclones[j].prop == 0: #
-                self.nxgraph.remove_node(self.sim.subclones[j])
+
+            # nodes that have not been added but are added automatically without label if these w
             for k in range(len(weights)):
-                self.nxgraph.add_edge(self.sim.subclones[j], self.sim.subclones[k], weight=weights[k])
+                if not self.sim.subclones[k] in self.nxgraph.nodes:
+                    self.nxgraph.add_node(self.sim.subclones[j], name=self.sim.subclones[j].label)
+                if weights[k] > 0:
+                    self.nxgraph.add_edge(self.sim.subclones[j], self.sim.subclones[k], weight=weights[k])
 
     def get_data(self):
         """
@@ -110,25 +113,28 @@ class Graph():
 
 
     def plot(self, title, savefile=None):
-        pos = nx.spring_layout(self.nxgraph)
+        pos = nx.spring_layout(self.nxgraph, k=2/np.sqrt(len(self.sim.subclones)))
         # Plot graph with labels as specified by label_dict
-
+        cmap = plt.cm.get_cmap("Pastel2", len(self.sim.subclones))
+        colors = [cmap(i / len(self.sim.subclones)) for i in range(len(self.sim.subclones))]
         labs = dict(zip(self.sim.subclones, self.sim.names))
-        nx.draw(self.nxgraph, pos, labels=labs, with_labels=True)
+        pops = [sc.prop * 1000 for sc in self.sim.subclones]
+
+        nx.draw_networkx(self.nxgraph, pos,node_size=pops,with_labels=True,labels=labs, width=0.5, font_size=10 , node_color=colors)
 
         # Create edge label Dictionary to label edges:
         edge_labels = nx.get_edge_attributes(self.nxgraph, "weight")
-        nx.draw_networkx_edge_labels(self.nxgraph, pos, labels=edge_labels)
+
+        # nx.draw_networkx_edge_labels(self.nxgraph, pos, labels=edge_labels, font_size=5)
         # -------- Draw fitness labels above -----
 
         pos_higher = {}
-        y_offset = 0.07  # Might have to play around with
+        y_offset = 0.04  # Might have to play around with
         for k, v in pos.items():
             pos_higher[k] = (v[0], v[1] + y_offset)
-
-        fit = {n: f'fitness: {n.fitness}' for n in self.sim.subclones}
+        fit = {n: "f: %.2f"%n.fitness for n in self.sim.subclones}
         plt.title(title)
-        nx.draw_networkx_labels(self.nxgraph, pos=pos_higher, font_size=10, font_color='black', labels=fit)
+        nx.draw_networkx_labels(self.nxgraph, pos=pos_higher, font_size=5, font_color='black', labels=fit)
         if savefile:
           plt.savefig(savefile)
         plt.show()
