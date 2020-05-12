@@ -129,9 +129,9 @@ class Graph():
         fit = {n: f'fitness: {n.fitness}' for n in self.sim.subclones}
         plt.title(title)
         nx.draw_networkx_labels(self.nxgraph, pos=pos_higher, font_size=10, font_color='black', labels=fit)
-        plt.show()
         if savefile:
           plt.savefig(savefile)
+        plt.show()
         plt.close()
 
     def apply_medicine(self, target_node, depth, verbose=False):

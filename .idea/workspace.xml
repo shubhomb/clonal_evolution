@@ -2,15 +2,58 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a00cb376-15da-4041-b3b3-d19558dc2749" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/graph-model/environment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/simulation/graph.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graph-model/doctor.py" beforeDir="false" afterPath="$PROJECT_DIR$/graph-model/doctor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graph-model/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/graph-model/graph.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graph-model/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/graph-model/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulation/doctor.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/doctor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/graph_test/fitness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/graph_test/params/alphas.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/graph_test/params/cs.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/graph_test/params/params.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/graph_test/params/treatments.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/graph_test/proportions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/graph_test/treatments.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_1/fitness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_1/params/alphas.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_1/params/cs.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_1/params/params.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_1/params/treatments.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_1/proportions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_1/treatments.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_2/fitness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_2/params/alphas.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_2/params/cs.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_2/params/params.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_2/params/treatments.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_2/proportions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_2/treatments.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_3/fitness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_3/params/alphas.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_3/params/cs.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_3/params/params.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_3/params/treatments.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_3/proportions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_rand_3/treatments.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_1/fitness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_1/params/alphas.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_1/params/cs.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_1/params/params.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_1/params/treatments.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_1/proportions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_1/treatments.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_4/fitness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_4/params/alphas.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_4/params/cs.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_4/params/params.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_4/params/treatments.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_4/proportions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_4/treatments.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_6/fitness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_6/params/alphas.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_6/params/cs.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_6/params/params.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_6/params/treatments.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_6/proportions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_6/treatments.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulation/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/graph.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simulation/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/simulation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulation/subclone.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/subclone.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +69,7 @@
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$viz.coverage" NAME="viz Coverage Results" MODIFIED="1586104483946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/search_engine_viz" />
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$graph.coverage" NAME="graph Coverage Results" MODIFIED="1587495307784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graph" />
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$gompertz_growth.coverage" NAME="gompertz_growth Coverage Results" MODIFIED="1586102584444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/mm_clonal_evolution$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1589252872614" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simulation" />
+    <SUITE FILE_PATH="coverage/mm_clonal_evolution$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1589257757648" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simulation" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -46,7 +89,7 @@
     <session id="-1021577653">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="26" />
+          <entry key="project.closed" value="27" />
           <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="2" />
@@ -54,7 +97,7 @@
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.14" value="3" />
           <entry key="project.open.time.16" value="1" />
-          <entry key="project.open.time.18" value="2" />
+          <entry key="project.open.time.18" value="3" />
           <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.28" value="1" />
@@ -64,7 +107,7 @@
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="27" />
+          <entry key="project.opened" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -73,14 +116,14 @@
           <entry key="gitignore" value="1" />
           <entry key="md" value="4" />
           <entry key="npy" value="4" />
-          <entry key="png" value="89" />
+          <entry key="png" value="105" />
           <entry key="py" value="60" />
           <entry key="txt" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="89" />
+          <entry key="Image" value="105" />
           <entry key="Markdown" value="4" />
           <entry key="PLAIN_TEXT" value="13" />
           <entry key="Python" value="60" />
@@ -92,14 +135,14 @@
           <entry key="dummy" value="18" />
           <entry key="gitignore" value="22" />
           <entry key="md" value="4790" />
-          <entry key="py" value="21146" />
+          <entry key="py" value="21286" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Markdown" value="4790" />
           <entry key="PLAIN_TEXT" value="53" />
-          <entry key="Python" value="21146" />
+          <entry key="Python" value="21286" />
         </counts>
       </usages-collector>
     </session>
@@ -109,7 +152,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simulation/doctor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
+            <state relative-caret-position="832">
               <caret line="52" column="25" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="25" />
             </state>
           </provider>
@@ -118,8 +161,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/simulation/simulation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="167" column="16" lean-forward="true" selection-start-line="167" selection-start-column="16" selection-end-line="167" selection-end-column="16" />
+            <state relative-caret-position="208">
+              <caret line="215" column="50" selection-start-line="215" selection-start-column="50" selection-end-line="215" selection-end-column="50" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -130,10 +173,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simulation/graph.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="119" column="53" selection-start-line="119" selection-start-column="53" selection-end-line="119" selection-end-column="53" />
+            <state relative-caret-position="-48">
+              <caret line="125" column="32" selection-start-line="125" selection-start-column="32" selection-end-line="125" selection-end-column="32" />
               <folding>
-                <marker date="1589252758991" expanded="true" signature="3407:3921" ph="..." />
+                <marker date="1589255242664" expanded="true" signature="3407:3921" ph="..." />
               </folding>
             </state>
           </provider>
@@ -150,8 +193,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>greedy_fitt</find>
-      <find>strat_profil</find>
       <find>strat_profile</find>
       <find>prop</find>
       <find>plt.</find>
@@ -180,6 +221,8 @@
       <find>weight</find>
       <find>weigh</find>
       <find>fitness</find>
+      <find>savedir</find>
+      <find>savefile</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -245,6 +288,20 @@
               <item name="mm_clonal_evolution" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
               <item name="simulations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mm_clonal_evolution" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mm_clonal_evolution" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="simulations" type="462c0819:PsiDirectoryNode" />
+              <item name="graph_te_1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mm_clonal_evolution" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mm_clonal_evolution" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="simulations" type="462c0819:PsiDirectoryNode" />
+              <item name="greedy_equiv_random" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mm_clonal_evolution" type="b2602c69:ProjectViewProjectNode" />
@@ -437,7 +494,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3577181" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17919463" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -456,9 +513,32 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.6422819" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.63691276" />
       <window_info anchor="right" id="Database" order="4" weight="0.3295302" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.36308724" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.34184396" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067115" side_tool="true" weight="0.34184396" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32907802" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32907802" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.63691276" />
+      <window_info anchor="right" id="Database" order="4" weight="0.3295302" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -467,29 +547,7 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/drug-resis/viz/evolution.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/simple_graph_evolve/writeup.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graph-model/plots/Plot time 0.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graph-model/plots/Plot time 1.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graph-model/plots/Plot time 2.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graph-model/plots/Plot time 3.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/graph-model/plots/Plot time 3.png" />
     <entry file="file://$PROJECT_DIR$/data/simulations/greedy_fit_working/fitness.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -531,15 +589,6 @@
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_rand_2/treatments.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_rand_3/treatments.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_rand_3/proportions.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_rand_3/fitness.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_rand_1/treatments.png">
@@ -607,9 +656,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
           <caret line="84" column="40" selection-start-line="84" selection-start-column="34" selection-end-line="84" selection-end-column="40" />
-          <folding>
-            <element signature="e#519#538#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -634,45 +680,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/graph_test/fitness.png">
+    <entry file="file://$PROJECT_DIR$/data/simulations/graph_te_1/fitness.png" />
+    <entry file="file://$PROJECT_DIR$/data/simulations/graph_te_1/proportions.png" />
+    <entry file="file://$PROJECT_DIR$/data/simulations/graph_te_1/treatments.png" />
+    <entry file="file://$PROJECT_DIR$/simulation/doctor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="832">
+          <caret line="52" column="25" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_rand_3/fitness.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/graph_test/proportions.png">
+    <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_rand_3/proportions.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_rand_3/treatments.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_6/treatments.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_6/proportions.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_random_te_6/fitness.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/simulations/graph_test/fitness.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/data/simulations/graph_test/treatments.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/graph_te_1/fitness.png">
+    <entry file="file://$PROJECT_DIR$/data/simulations/graph_test/proportions.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/graph_te_1/proportions.png">
+    <entry file="file://$PROJECT_DIR$/data/simulations/graph_test/graph.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/simulations/graph_te_1/treatments.png">
+    <entry file="file://$PROJECT_DIR$/data/simulations/graph_te_1/graph.png">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulation/doctor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="52" column="25" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="25" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/simulation/graph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="119" column="53" selection-start-line="119" selection-start-column="53" selection-end-line="119" selection-end-column="53" />
+        <state relative-caret-position="-48">
+          <caret line="125" column="32" selection-start-line="125" selection-start-column="32" selection-end-line="125" selection-end-column="32" />
           <folding>
-            <marker date="1589252758991" expanded="true" signature="3407:3921" ph="..." />
+            <marker date="1589255242664" expanded="true" signature="3407:3921" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/simulation/simulation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="167" column="16" lean-forward="true" selection-start-line="167" selection-start-column="16" selection-end-line="167" selection-end-column="16" />
+        <state relative-caret-position="208">
+          <caret line="215" column="50" selection-start-line="215" selection-start-column="50" selection-end-line="215" selection-end-column="50" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

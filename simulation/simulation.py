@@ -112,7 +112,6 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
         # Adjust Proportion
         model.adjust_proportion()
         graph.update()
-    graph.plot(title="test")
 
     savedir = os.path.join(os.path.split(os.getcwd())[0], "data", "simulations")
     if not dirname:
@@ -133,6 +132,7 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
     np.save(os.path.join(full_dir, "params", "alphas.npy"), alphas)
     np.save(os.path.join(full_dir, "params", "cs.npy"), cs)
     np.save(os.path.join(full_dir, "params", "treatments.npy"), treatments)
+    graph.plot(title="test", savefile=os.path.join(full_dir, "graph.png"))
 
     with open(os.path.join(full_dir, "params", "params.txt"), "w+") as f:
         f.write("alpha: \n " + str(alphas) +
@@ -199,7 +199,12 @@ if __name__ == "__main__":
 
     subclones = [Subclone(lbl="A",c=0.03, alpha=[0.1, 2.2], prop=0.05),
                  Subclone(lbl="B", c=0.03, alpha=[1.1, 0.05], prop=0.05),
-                 Subclone(lbl="S", c=0.01, alpha=[0.8, 0.7], prop=0.9),
+                 Subclone(lbl="A.a", c=0.01, alpha=[0.12, 1.7], prop=0.01),
+                 Subclone(lbl="A.b", c=0.01, alpha=[0.11, 1.7], prop=0.01),
+                 Subclone(lbl="A.c", c=0.03, alpha=[0.09, 2.1], prop=0.01),
+                 Subclone(lbl="B.a", c=0.02, alpha=[1.12, 0.04], prop=0.01),
+                 Subclone(lbl="B.c", c=0.02, alpha=[1.08, 0.09], prop=0.01),
+                 Subclone(lbl="S", c=0.01, alpha=[0.8, 0.7], prop=0.85),
                  ]
     tnames = ["Drug A", "Drug B"]
 
@@ -210,9 +215,8 @@ if __name__ == "__main__":
     magnitude = 0
     # define a strategy profile for doctor to decide actionsE online
     distro = np.array([0, 0.5, 0, 0.5])
-    adjacency_matx = np.array([[1, 0.3, 0],
-                               [0.3, 1, 0],
-                               [0, 0, 1]])
+    adjacency_matx = np.eye(len(subclones))
+
     run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames, doc_times=dt,
-            distro=distro, doc_decay=0.98, dirname="graph_test", adj=adjacency_matx)
+            distro=distro, doc_decay=0.98, dirname="many_subclones", adj=adjacency_matx)
 
