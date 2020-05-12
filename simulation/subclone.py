@@ -8,12 +8,13 @@ class Subclone:
         :attr prop:     Current Proportion
     """
 
-    def __init__(self, lbl, c, alpha, prop=0.333):
+    def __init__(self, lbl, c, alpha, prop=0.333, birthtime=None):
         self.label = lbl
         self.fitness = 0.0
         self.prop = prop
         self.c = c
         self.alpha = alpha
+        self.bt = birthtime
 
     def __str__(self):
         return self.label
@@ -25,3 +26,12 @@ class Subclone:
         """
         self.fitness = 1 - self.c - np.dot(self.alpha, treatment)
         return self.fitness
+
+
+    def log(self):
+        print("Node: ", self.label)
+        print("Birthtime: ", self.bt)
+        print(f'\t \t Alpha: {self.alpha}')
+        print(f'\t \t Prop: {self.prop}')
+        print(f'\t \t Resistant: {self.c}')
+        print(f'\t \t Fitness: {self.fitness}')

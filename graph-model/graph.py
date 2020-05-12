@@ -114,6 +114,59 @@ class Graph():
         We choose this design for quick lookup for doctor treatment.
     """
 
+    def __init__(self, env):
+        """
+            Given environment object consisting of:
+                - names  (list): names of subclone colony
+                - relations (matrix): adj matrix representing relations
+                - alpha  (list) : of corresponding alpha constants
+                - prop  (list) : of corresponding initial proportions
+
+            Has attributes:
+                - Point map (dict): mapping from node to its neighbors
+                - all_nodes (list): list of all nodes
+                - all_edges  (list): list of all edgs
+                - networkx_graph (networkx graph):
+                - avg fitness
+                - label_dict (map) : Maps node to its name (for plotting)
+
+        Initializes a graph instance
+        """
+        self.pointmap = {}  # map[node] = [(node, weight), (node2, eweight), ..]
+        self.all_nodes = []  # [Node1, Node2, ... ]
+        self.all_edges = []  # [(node1, node2, weight), ...] -- For printing
+        self.nxgraph = nx.Graph()
+        self.avgfitness = 0
+
+        # Plotting purposes
+        self.label_dict = {}  # Maps node to name (for plotting purposes)
+
+        #  Initialize all nodes
+        for (name, neigh, alpha, prop) in zip(env.names, env.relations, env.alpha, env.prop):
+            new_colony = Colony(name, neigh, alpha, prop)
+            new_node = Node(new_colony, 0, [(None, None)])
+            self.pointmap[new_node] = [(None, None)]
+            self.all_nodes.append(new_node)
+            self.label_dict[new_node] = name
+
+        # Add edges -- hacky way -- can make cleaner:
+        ptr = 0  # current node exploring
+        for (name, neigh) in zip(env.names, env.relations):
+            curr = 0  # pointer to each neighbor
+            neighbor_list = []  # tuples (weight, node) list
+            # Iterate through all neighbors and add nonzero ones to list
+            for neighbor_weight in neigh:
+                if neighbor_weight > 0 and curr != ptr:
+                    neighbor_list.append((neighbor_weight, self.all_nodes[curr]))
+                    self.all_edges.append((self.all_nodes[ptr], self.all_nodes[curr], neighbor_weight))
+                curr += 1
+            self.pointmap[self.all_nodes[ptr]] = neighbor_list
+            self.all_nodes[ptr].edges = neighbor_list
+
+            ptr += 1
+
+        self.nxgraph.add_nodes_from(self.all_nodes)
+        self.nxgraph.add_weighted_edges_from(self.all_edges)
 
     def get_data(self):
         """
@@ -177,62 +230,6 @@ class Graph():
 
 
 
-
-    def __init__(self, env):
-        """
-            Given environment object consisting of:
-                - names  (list): names of subclone colony
-                - relations (matrix): adj matrix representing relations
-                - alpha  (list) : of corresponding alpha constants 
-                - prop  (list) : of corresponding initial proportions
-            
-            Has attributes:
-                - Point map (dict): mapping from node to its neighbors
-                - all_nodes (list): list of all nodes
-                - all_edges  (list): list of all edgs
-                - networkx_graph (networkx graph):
-                - avg fitness
-                - label_dict (map) : Maps node to its name (for plotting)
-
-        Initializes a graph instance
-        """
-        self.pointmap = {} # map[node] = [(node, weight), (node2, eweight), ..]
-        self.all_nodes = [] # [Node1, Node2, ... ]
-        self.all_edges = [] # [(node1, node2, weight), ...] -- For printing
-        self.nxgraph = nx.Graph()
-        self.avgfitness = 0
-
-        # Plotting purposes
-        self.label_dict = {}  # Maps node to name (for plotting purposes)
-        
-
-        #  Initialize all nodes
-        for (name, neigh, alpha, prop)  in zip(env.names, env.relations, env.alpha, env.prop):
-            new_colony = Colony(name, neigh, alpha, prop)
-            new_node = Node(new_colony, 0, [(None, None)])
-            self.pointmap[new_node] = [(None, None)]
-            self.all_nodes.append(new_node)  
-            self.label_dict[new_node] = name
-
-        # Add edges -- hacky way -- can make cleaner:
-        ptr = 0 # current node exploring
-        for (name, neigh)  in zip(env.names, env.relations):
-            curr = 0 #pointer to each neighbor
-            neighbor_list = [] #tuples (weight, node) list
-            # Iterate through all neighbors and add nonzero ones to list
-            for neighbor_weight in neigh:
-                if neighbor_weight > 0 and curr != ptr:
-                    neighbor_list.append((neighbor_weight, self.all_nodes[curr])) 
-                    self.all_edges.append((self.all_nodes[ptr], self.all_nodes[curr], neighbor_weight))
-                curr += 1
-            self.pointmap[self.all_nodes[ptr]] = neighbor_list
-            self.all_nodes[ptr].edges = neighbor_list
-            
-
-            ptr+=1
-        
-        self.nxgraph.add_nodes_from(self.all_nodes)
-        self.nxgraph.add_weighted_edges_from(self.all_edges)
 
 
     def apply_medicine(self, target_node, depth, debug=False):

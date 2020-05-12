@@ -3,7 +3,7 @@ import numpy as np
 from datetime import datetime
 import matplotlib.pyplot as plt
 
-
+from graph import Graph
 from subclone import Subclone
 from doctor import Doctor
 from payoff_matrix import PayoffMatrix
@@ -15,7 +15,7 @@ class Simulation:
         of the subclone colonies.  In this example, it is hardcoded to three
         colonies.
     """
-    def __init__(self, subclones, treatments):
+    def __init__(self, subclones, treatments, adjacency=None):
         """
             :attr time: Time stamp starting from t=0
             :attr subclones (list): list of Subclone objects
@@ -25,8 +25,11 @@ class Simulation:
         """
         self.t = 0
         self.subclones = subclones
+        self.names = [sc.label for sc in self.subclones]
         self.treatments = treatments
         self.num_timesteps = self.treatments.shape[0]
+        self.adj = adjacency
+        self.graph = None
 
 
     def adjust_proportion(self):
@@ -59,7 +62,7 @@ class Simulation:
         return  self.calc_avg_fitness()
 
 
-def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, strat_profile, doc_times=None, distro=None, doc_decay=0, dirname=None):
+def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, doc_times=None, distro=None, doc_decay=0, dirname=None, adj=None):
     '''
 
     :param max_time (int): The number of timesteps to consider
@@ -68,6 +71,11 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, st
     :param subclones (list): Subclonal populations present initially.
     :param treatment_names (list): names of each treatments (list length = num_treatments)
     :param doc_interval (np.ndarray): shape (max_time) with booleans representing if doctor can act at t. Default: can act at each step.
+    :param doc_times (np.ndarray): shape (max_time) True or False times where doctor can act
+    :param distro (np.ndarray): shape (num_treatments) distrbution of strategy profile
+    :param doc_decay(float): Amount of exponential decay in treatment intensity after doctor action
+    :param dirname (str): Path to save files
+    :param adj(np.ndarray): shape (len(subclones), len(subclones)) specifying graph structure adjacency matrix with [0-1] edge weights
     :return:
     '''
     if not treatments.shape[0] == max_time and treatments.shape[1] == num_treatments:
@@ -77,8 +85,12 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, st
     if doc_times is None:
         doc_times = np.ones(shape=num_treatments)
     stratlog = []
-    model = Simulation(subclones, treatments)
-    doc = Doctor(model, schedule=doc_times, decay=doc_decay)
+    model = Simulation(subclones, treatments, adj)
+    graph = Graph(model)
+    model.graph = graph
+    doc = Doctor(model, schedule=doc_times, decay=doc_decay, distro=distro)
+    if distro.shape[0] != doc.num_strats:
+        raise ValueError("Define distribution over all doctor strategies")
     log_fitness = np.zeros(shape=(MAX_TIME, len(subclones)))
     log_props = np.zeros(shape=(MAX_TIME, len(subclones)))
     log_avg_fitness = np.zeros(shape=(MAX_TIME))
@@ -89,8 +101,7 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, st
         log_avg_fitness[t] = avg
 
         if doc_times[t]:
-            stratname, strat= strat_profile(distro) # perform doctor action according to predefined strategy profile (allows randomness)
-            print (stratname)
+            stratname, strat = doc.mixed_strategy() # perform doctor action according to predefined strategy profile (allows randomness)
             stratlog.append(stratname)
             strat(doc)
         matx = PayoffMatrix(model)
@@ -100,6 +111,9 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, st
         avg = model.run_step()
         # Adjust Proportion
         model.adjust_proportion()
+        graph.update()
+    graph.plot(title="test")
+
     savedir = os.path.join(os.path.split(os.getcwd())[0], "data", "simulations")
     if not dirname:
         dirname = str(datetime.today().date()).replace("-", "_") + "_0"
@@ -195,16 +209,10 @@ if __name__ == "__main__":
     np.random.seed(0)
     magnitude = 0
     # define a strategy profile for doctor to decide actionsE online
-    def mixed_strategy(distro):
-        if np.sum(distro) > 1:
-            raise ValueError("Distribution sum should add to 1")
-        strats = {"propweight": lambda doc: doc.greedy_propweighted_fitness(magnitude=1.0),
-                  "prop": lambda doc: doc.greedy_prop(magnitude=1.0),
-                  "fit": lambda doc: doc.greedy_fittest(magnitude=1.0)
-                  }
-        strat = np.random.choice(list(strats.keys()), 1, p=distro)[0]
-        return strat, strats[strat]
-    distro = [0.5, 0.4, 0.1]
+    distro = np.array([0, 0.5, 0, 0.5])
+    adjacency_matx = np.array([[1, 0.3, 0],
+                               [0.3, 1, 0],
+                               [0, 0, 1]])
     run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames, doc_times=dt,
-            strat_profile=mixed_strategy, distro=distro, doc_decay=0.9, dirname="greedy_equiv_random_test")
+            distro=distro, doc_decay=0.98, dirname="graph_test", adj=adjacency_matx)
 

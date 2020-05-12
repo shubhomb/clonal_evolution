@@ -44,11 +44,12 @@ class Environment():
 
 
 class Simulation():
-    def __init__(self, env, graph, MAX_TIME, debug=False):
+    def __init__(self, env, graph, doc, MAX_TIME, debug=False):
         self.env = env
         self.graph = graph
         self.MAX_TIME = MAX_TIME
         self.debug = debug
+        self.doctor = doc
         
     def printsim(self):
         self.env.log()
@@ -75,31 +76,17 @@ class Simulation():
         for node in self.graph.nxgraph.nodes:
             node.colony.prop *= (node.fitness ) / (self.graph.avgfitness)
 
-    def doctor(self, time):
-        """ 
-        Target maximum node and all nodes within some constant
-        
-        Returns target node
-        """
-        DEPTH = 0.1
-        # target_node = nx.maximal_independent_set(sim.graph.nxgraph)[0]
-        # all_degrees = list(self.graph.nxgraph.degree(self.graph.all_nodes, weight='weight'))
-        # target_node = min(all_degrees, key=lambda item:item[1])[0]
-        if time < 10:
-            target_node = list(self.graph.nxgraph.nodes)[0]
-        else:
-            target_node = target_node = list(self.graph.nxgraph.nodes)[2]
-
-        return target_node
 
 
-    def evolve(self, time):
+
+    def evolve(self, time, verbose=False):
         """ Takes in graph and evolves graph using doctor strategy
         """                
-        target_node = self.doctor(time)
-        print(f'Target Node: {target_node.colony.name}')
+        target_node = self.doctor.choose_node(time)
+        if verbose:
+            print("t=%d  Target Node: "%(time, target_node.colony.name))
         self.graph.apply_medicine(target_node, 0.1, debug=True)
-        
+
 
     def log(self):
         print('Model parameters:')
