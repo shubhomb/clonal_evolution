@@ -2,6 +2,7 @@ import os
 import numpy as np
 from datetime import datetime
 import matplotlib.pyplot as plt
+import pandas as pd
 
 from graph import Graph
 from subclone import Subclone
@@ -197,14 +198,22 @@ if __name__ == "__main__":
     #         treatments[t, 1] = np.random.uniform(0.5, 1.0)
 
     subclones = [Subclone(lbl="A",c=0.03, alpha=[0.1, 2.2], prop=0.05),
-                 Subclone(lbl="B", c=0.03, alpha=[1.1, 0.05], prop=0.05),
                  Subclone(lbl="A.a", c=0.01, alpha=[0.12, 1.7], prop=0.01),
+                 Subclone(lbl="A.a.a", c=0.02, alpha=[0.18, 1.9], prop=0.01),
+                 Subclone(lbl="A.a.b", c=0.015, alpha=[0.12, 1.7], prop=0.01),
                  Subclone(lbl="A.b", c=0.01, alpha=[0.11, 1.7], prop=0.01),
                  Subclone(lbl="A.c", c=0.03, alpha=[0.09, 2.1], prop=0.01),
+                 Subclone(lbl="B", c=0.03, alpha=[1.1, 0.05], prop=0.05),
                  Subclone(lbl="B.a", c=0.02, alpha=[1.12, 0.04], prop=0.01),
+                 Subclone(lbl="B.a.a", c=0.005, alpha=[0.9, 0.7], prop=0.01),
                  Subclone(lbl="B.b", c=0.02, alpha=[1.08, 0.09], prop=0.01),
-                 Subclone(lbl="S", c=0.01, alpha=[0.8, 0.7], prop=0.85),
-                 ]
+                 Subclone(lbl="S", c=0.01, alpha=[0.8, 0.7], prop=0.82)]
+
+    parents = [None, subclones[0], subclones[1], subclones[1], subclones[0], subclones[0], None, subclones[6], subclones[7], subclones[6], None]
+
+    for i in range(len(subclones)):
+        subclones[i].parent = parents[i]
+
     tnames = ["Drug A", "Drug B"]
 
     # Let doctor prescribe every 5 time intervals
@@ -213,20 +222,18 @@ if __name__ == "__main__":
     np.random.seed(0)
     magnitude = 0
     # define a strategy profile for doctor to decide actionsE online
-    distro = np.array([0, 0.5, 0, 0.5])
+    distro = np.array([0, 0, 0, 1])
     adjacency_matx = np.zeros((len(subclones), len(subclones)))
     for j in range(len(subclones)):
         for k in range(len(subclones)):
-            if "A" in subclones[j].label and "A" in subclones[k].label:
+            if subclones[j].parent == subclones[k]:
+                adjacency_matx[k][j] = 0.9
                 adjacency_matx[j][k] = 0.9
-            elif "B" in subclones[j].label and "B" in subclones[k].label:
-                adjacency_matx[j][k] = 0.9
-            else:
-                pass
 
-    adjacency_matx *= 10
+    names = [sc.label for sc in subclones]
+    print (pd.DataFrame(adjacency_matx, columns=names, index=names))
 
 
     run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames, doc_times=dt,
-            distro=distro, doc_decay=0.98, dirname="many_subclones_cluster", adj=adjacency_matx)
+            distro=distro, doc_decay=0.98, dirname="greedy_degree", adj=adjacency_matx)
 

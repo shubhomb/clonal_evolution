@@ -39,7 +39,6 @@ class Graph():
 
         We choose this design for quick lookup for doctor treatment.
     """
-
     def __init__(self, sim):
         """
             Given environment object consisting of:
@@ -58,31 +57,10 @@ class Graph():
 
         Initializes a graph instance
         """
-        # self.pointmap = {}  # map[node] = [(node, weight), (node2, eweight), ..]
-        # self.all_nodes = []  # [Node1, Node2, ... ]
-        # self.all_edges = []  # [(node1, node2, weight), ...] -- For printing
         self.nxgraph = nx.Graph()
         self.sim = sim
         self.update()
-        #
-        # # Add edges -- hacky way -- can make cleaner:
-        # ptr = 0  # current node exploring
-        # for (name, neigh) in zip(sim.names, sim.adj):
-        #     curr = 0  # pointer to each neighbor
-        #     neighbor_list = []  # tuples (weight, node) list
-        #     # Iterate through all neighbors and add nonzero ones to list
-        #     for neighbor_weight in neigh:
-        #         if neighbor_weight > 0 and curr != ptr:
-        #             neighbor_list.append((neighbor_weight, self.all_nodes[curr]))
-        #             self.all_edges.append((self.all_nodes[ptr], self.all_nodes[curr], neighbor_weight))
-        #         curr += 1
-        #     self.pointmap[self.all_nodes[ptr]] = neighbor_list
-        #     self.all_nodes[ptr].edges = neighbor_list
-        #
-        #     ptr += 1
-        #
-        # self.nxgraph.add_nodes_from(self.all_nodes)
-        # self.nxgraph.add_weighted_edges_from(self.all_edges)
+
     def update(self):
         for j in range(len(self.sim.subclones)):
             weights = self.sim.adj[j, :]
