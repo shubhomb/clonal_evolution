@@ -62,7 +62,7 @@ class Simulation:
         return  self.calc_avg_fitness()
 
 
-def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, doc_times=None, distro=None, doc_decay=0, dirname=None, adj=None):
+def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, save, doc_times=None, distro=None, doc_decay=0, dirname=None, adj=None):
     '''
 
     :param max_time (int): The number of timesteps to consider
@@ -70,6 +70,7 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
     :param treatments (np.ndarray): shape (max_time, num_treatments) for pre-scheduled treatments. Can be zeros if doctor responds in real time
     :param subclones (list): Subclonal populations present initially.
     :param treatment_names (list): names of each treatments (list length = num_treatments)
+    :param save(bool): true if you want to save these results
     :param doc_interval (np.ndarray): shape (max_time) with booleans representing if doctor can act at t. Default: can act at each step.
     :param doc_times (np.ndarray): shape (max_time) True or False times where doctor can act
     :param distro (np.ndarray): shape (num_treatments) distrbution of strategy profile
@@ -105,43 +106,47 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
             stratlog.append(stratname)
             strat(doc)
         matx = PayoffMatrix(model)
-        if t == 0 or t == 2:
+        if t == max_time - 1:
+            print ('Payoff Matrix: ', t)
             matx.print_matrix()
         del(matx)
         avg = model.run_step()
         # Adjust Proportion
         model.adjust_proportion()
         graph.update()
-
-    savedir = os.path.join(os.path.split(os.getcwd())[0], "data", "simulations")
-    if not dirname:
-        dirname = str(datetime.today().date()).replace("-", "_") + "_0"
-    i = 1
-    while os.path.exists(os.path.join(savedir, dirname)):
-        dirname = dirname[:-2] + "_%d"%i
-        i += 1
-    full_dir = os.path.join(savedir, dirname)
-    os.mkdir(full_dir)
+    full_dir = None
+    if save:
+        savedir = os.path.join(os.path.split(os.getcwd())[0], "data", "simulations")
+        if not dirname:
+            dirname = str(datetime.today().date()).replace("-", "_") + "_0"
+        i = 1
+        while os.path.exists(os.path.join(savedir, dirname)):
+            dirname = dirname[:-2] + "_%d"%i
+            i += 1
+        full_dir = os.path.join(savedir, dirname)
+        os.mkdir(full_dir)
     cs = np.array([sc.c for sc in subclones])
     alphas = np.zeros(shape=(len(subclones), num_treatments))
     for i in range(len(subclones)):
         alphas[i, :] = subclones[i].alpha
+    if save:
+        if not os.path.exists(os.path.join(full_dir, "params")):
+            os.mkdir(os.path.join(full_dir, "params"))
+        np.save(os.path.join(full_dir, "params", "alphas.npy"), alphas)
+        np.save(os.path.join(full_dir, "params", "cs.npy"), cs)
+        np.save(os.path.join(full_dir, "params", "treatments.npy"), treatments)
 
-    if not os.path.exists(os.path.join(full_dir, "params")):
-        os.mkdir(os.path.join(full_dir, "params"))
-    np.save(os.path.join(full_dir, "params", "alphas.npy"), alphas)
-    np.save(os.path.join(full_dir, "params", "cs.npy"), cs)
-    np.save(os.path.join(full_dir, "params", "treatments.npy"), treatments)
-    graph.plot(title="Subclonal Graph", savefile=os.path.join(full_dir, "graph.png"))
+        with open(os.path.join(full_dir, "params", "params.txt"), "w+") as f:
+            f.write("alpha: \n " + str(alphas) +
+                    " \ncs:\n" + str(cs)
+                    + "\ntreatments:\n"
+                    + str(treatments)
+                    + "\nstratlog: \n" + str(stratlog))
 
-    with open(os.path.join(full_dir, "params", "params.txt"), "w+") as f:
-        f.write("alpha: \n " + str(alphas) +
-                " \ncs:\n" + str(cs)
-                + "\ntreatments:\n"
-                + str(treatments)
-                + "\nstratlog: \n" + str(stratlog))
-
-
+    if save:
+        graph.plot(title="Subclonal Graph", savefile=os.path.join(full_dir, "graph.png"))
+    else:
+        graph.plot(title="Subclonal Graph", savefile=None)
 
     # Plot Resulting Curves
 
@@ -155,7 +160,8 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
     plt.legend()
     title = "Proportion of tumor population over time"
     plt.title(title)
-    plt.savefig(os.path.join(full_dir, "proportions.png"))
+    if save:
+        plt.savefig(os.path.join(full_dir, "proportions.png"))
     plt.show()
 
     plt.grid()
@@ -168,7 +174,8 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
     plt.legend()
     title = "Subclonal fitness over time"
     plt.title(title)
-    plt.savefig(os.path.join(full_dir, "fitness.png"))
+    if save:
+      plt.savefig(os.path.join(full_dir, "fitness.png"))
     plt.show()
 
 
@@ -182,58 +189,73 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, do
     plt.legend()
     title = "Treatments over time"
     plt.title(title)
-    plt.savefig(os.path.join(full_dir, "treatments.png"))
+    if save:
+        plt.savefig(os.path.join(full_dir, "treatments.png"))
     plt.show()
 
+def generate_random_subclones(n_init, max_subclones, seed, num_treatments, eps=0.0001, thresh=0.9):
+    np.random.seed(seed)
+    subclones = []
+    p_left = 1
+    num_children = {}
+    for j in range(n_init):
+        lbl = chr(j + 65)
+        c = np.random.uniform()
+        alpha = np.random.uniform(size=num_treatments)
+        prop = max(0.0, np.random.uniform(eps,p_left))
+        p_left -= prop
+        subclones.append(Subclone(lbl=lbl, c=c, alpha=alpha, prop=prop))
+        num_children[lbl] = 0
+
+    for j in range(max_subclones):
+        props = np.array([sc.prop for sc in subclones])
+        props = props / np.sum(props)
+        parent = np.random.choice(subclones, p=props) # weight by parent proportion
+        c = max(0, min(1, np.random.uniform(low=-0.1, high=0.1) + parent.c))
+        alpha = np.random.uniform(low=-0.1, high=0.1, size=num_treatments) + parent.alpha
+        alpha[alpha < 0] = 0
+        alpha[alpha > 1] = 1
+        prop = max(0.0, np.random.uniform(eps,p_left))
+        p_left -= prop
+        lbl = parent.label + "." + chr(num_children[parent.label] + 97)
+        num_children[parent.label] += 1
+        kid = Subclone(lbl=lbl, c=c, alpha=alpha, prop=prop)
+        kid.parent = parent
+        subclones.append(kid)
+        num_children[lbl] = 0
+
+    adjacency_matx = np.zeros((len(subclones), len(subclones)))
+    for j in range(len(subclones)):
+        for k in range(len(subclones)):
+            phtype_j = np.hstack([subclones[j].c, subclones[j].alpha])
+            phtype_k = np.hstack([subclones[k].c, subclones[k].alpha])
+            sim = phtype_j.dot(phtype_k) / (np.linalg.norm(phtype_j) * np.linalg.norm(phtype_k))
+            if subclones[j].parent == subclones[k] and sim > thresh:
+                adjacency_matx[k][j] = sim
+                adjacency_matx[j][k] = sim
+
+    return subclones, adjacency_matx
 
 if __name__ == "__main__":
     MAX_TIME = 100
     num_treatments = 2
     treatments = np.zeros(shape=(MAX_TIME, num_treatments))
-    # for t in range(MAX_TIME):
-    #     p = np.random.uniform()
-    #     if p < 0.5:
-    #         treatments[t, 0] = np.random.uniform(0.5, 1.0)
-    #     else:
-    #         treatments[t, 1] = np.random.uniform(0.5, 1.0)
-
-    subclones = [Subclone(lbl="A",c=0.03, alpha=[0.1, 2.2], prop=0.05),
-                 Subclone(lbl="A.a", c=0.01, alpha=[0.12, 1.7], prop=0.01),
-                 Subclone(lbl="A.a.a", c=0.02, alpha=[0.18, 1.9], prop=0.01),
-                 Subclone(lbl="A.a.b", c=0.015, alpha=[0.12, 1.7], prop=0.01),
-                 Subclone(lbl="A.b", c=0.01, alpha=[0.11, 1.7], prop=0.01),
-                 Subclone(lbl="A.c", c=0.03, alpha=[0.09, 2.1], prop=0.01),
-                 Subclone(lbl="B", c=0.03, alpha=[1.1, 0.05], prop=0.05),
-                 Subclone(lbl="B.a", c=0.02, alpha=[1.12, 0.04], prop=0.01),
-                 Subclone(lbl="B.a.a", c=0.005, alpha=[0.9, 0.7], prop=0.01),
-                 Subclone(lbl="B.b", c=0.02, alpha=[1.08, 0.09], prop=0.01),
-                 Subclone(lbl="S", c=0.01, alpha=[0.8, 0.7], prop=0.82)]
-
-    parents = [None, subclones[0], subclones[1], subclones[1], subclones[0], subclones[0], None, subclones[6], subclones[7], subclones[6], None]
-
-    for i in range(len(subclones)):
-        subclones[i].parent = parents[i]
-
     tnames = ["Drug A", "Drug B"]
 
     # Let doctor prescribe every 5 time intervals
     dt = np.zeros(MAX_TIME)
     dt[::10] = 1
     np.random.seed(0)
-    magnitude = 0
-    # define a strategy profile for doctor to decide actionsE online
-    distro = np.array([0, 0, 0, 1])
-    adjacency_matx = np.zeros((len(subclones), len(subclones)))
-    for j in range(len(subclones)):
-        for k in range(len(subclones)):
-            if subclones[j].parent == subclones[k]:
-                adjacency_matx[k][j] = 0.9
-                adjacency_matx[j][k] = 0.9
 
+    subclones, adjacency_matrix = generate_random_subclones(n_init=3, max_subclones=5, seed=0, num_treatments=num_treatments)
     names = [sc.label for sc in subclones]
-    print (pd.DataFrame(adjacency_matx, columns=names, index=names))
+    print ("ADJACENCY")
+    print (pd.DataFrame(adjacency_matrix, columns=names, index=names))
 
+    # distro = np.array([0, 0, 0, 1])
+    # run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames, save=False, doc_times=dt,
+    #         distro=distro, doc_decay=0.98, dirname="greedy_degree", adj=adjacency_matrix)
 
-    run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames, doc_times=dt,
-            distro=distro, doc_decay=0.98, dirname="greedy_degree", adj=adjacency_matx)
+    info = pd.DataFrame([(sc.label, np.round(sc.prop, 4), sc.fitness, sc.parent, np.round(sc.alpha, 2)) for sc in subclones], columns=["label", "prop", "fitness", "parent", "alpha"])
+    print (info)
 

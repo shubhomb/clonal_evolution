@@ -2,26 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a00cb376-15da-4041-b3b3-d19558dc2749" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/graph_te_1/fitness.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/graph_te_1/graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/graph_te_1/params/alphas.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/graph_te_1/params/cs.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/graph_te_1/params/params.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/graph_te_1/params/treatments.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/graph_te_1/proportions.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/graph_te_1/treatments.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/many_subclones_cluster/fitness.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/many_subclones_cluster/graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/many_subclones_cluster/params/alphas.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/many_subclones_cluster/params/cs.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/many_subclones_cluster/params/params.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/many_subclones_cluster/params/treatments.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/many_subclones_cluster/proportions.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulations/many_subclones_cluster/treatments.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulation/doctor.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/doctor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simulation/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/graph.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simulation/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/simulation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulation/subclone.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/subclone.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,10 +17,11 @@
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$main__2_.coverage" NAME="main (2) Coverage Results" MODIFIED="1588703209861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graph-model" />
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1587520800993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/drug-resis" />
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$main.coverage" NAME="main Coverage Results" MODIFIED="1586891162305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graph" />
+    <SUITE FILE_PATH="coverage/mm_clonal_evolution$graph__1_.coverage" NAME="graph (1) Coverage Results" MODIFIED="1589775831463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simulation" />
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$viz.coverage" NAME="viz Coverage Results" MODIFIED="1586104483946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/search_engine_viz" />
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$graph.coverage" NAME="graph Coverage Results" MODIFIED="1587495307784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graph" />
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$gompertz_growth.coverage" NAME="gompertz_growth Coverage Results" MODIFIED="1586102584444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/mm_clonal_evolution$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1589336224229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simulation" />
+    <SUITE FILE_PATH="coverage/mm_clonal_evolution$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1589776200164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simulation" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -72,12 +56,12 @@
           <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.28" value="1" />
           <entry key="project.open.time.3" value="2" />
-          <entry key="project.open.time.4" value="2" />
+          <entry key="project.open.time.4" value="3" />
           <entry key="project.open.time.40" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="33" />
+          <entry key="project.opened" value="34" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -87,7 +71,7 @@
           <entry key="md" value="4" />
           <entry key="npy" value="4" />
           <entry key="png" value="116" />
-          <entry key="py" value="65" />
+          <entry key="py" value="69" />
           <entry key="txt" value="7" />
         </counts>
       </usages-collector>
@@ -96,7 +80,7 @@
           <entry key="Image" value="116" />
           <entry key="Markdown" value="4" />
           <entry key="PLAIN_TEXT" value="14" />
-          <entry key="Python" value="65" />
+          <entry key="Python" value="69" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -105,25 +89,25 @@
           <entry key="dummy" value="18" />
           <entry key="gitignore" value="22" />
           <entry key="md" value="4790" />
-          <entry key="py" value="23485" />
+          <entry key="py" value="26367" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Markdown" value="4790" />
           <entry key="PLAIN_TEXT" value="53" />
-          <entry key="Python" value="23485" />
+          <entry key="Python" value="26367" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/simulation/simulation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3392">
-              <caret line="221" column="21" selection-start-line="221" selection-start-column="21" selection-end-line="221" selection-end-column="21" />
+            <state relative-caret-position="323">
+              <caret line="258" column="56" selection-start-line="258" selection-start-column="56" selection-end-line="258" selection-end-column="56" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -131,11 +115,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simulation/graph.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="63" selection-start-line="63" selection-end-line="63" />
+            <state relative-caret-position="-238">
+              <caret line="99" column="108" selection-start-line="99" selection-start-column="108" selection-end-line="99" selection-end-column="108" />
               <folding>
                 <element signature="e#610#628#0" expanded="true" />
               </folding>
@@ -146,8 +130,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simulation/subclone.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="25" column="36" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
+            <state relative-caret-position="512">
+              <caret line="32" column="13" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -163,13 +147,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>interval</find>
-      <find>doctor</find>
-      <find>print (&quot;de</find>
-      <find>self.doc</find>
-      <find>self.do</find>
-      <find>apply_medi</find>
-      <find>class No</find>
       <find>env</find>
       <find>Environment</find>
       <find>new_colo</find>
@@ -178,7 +155,6 @@
       <find>edge_label</find>
       <find>save</find>
       <find>choose</find>
-      <find>num_treatments</find>
       <find>distro</find>
       <find>distr</find>
       <find>graph.</find>
@@ -188,11 +164,19 @@
       <find>savedir</find>
       <find>savefile</find>
       <find>graph</find>
-      <find>print</find>
       <find>added</find>
       <find>added to rga</find>
       <find>added to</find>
       <find>title</find>
+      <find>num_treatments</find>
+      <find>n_treatm</find>
+      <find>chr</find>
+      <find>plot</find>
+      <find>matx</find>
+      <find>magnitude</find>
+      <find>proportion of tu</find>
+      <find>names</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -217,10 +201,10 @@
         <option value="$PROJECT_DIR$/graph-model/graph.py" />
         <option value="$PROJECT_DIR$/graph-model/environment.py" />
         <option value="$PROJECT_DIR$/graph-model/doctor.py" />
-        <option value="$PROJECT_DIR$/simulation/doctor.py" />
         <option value="$PROJECT_DIR$/simulation/subclone.py" />
-        <option value="$PROJECT_DIR$/simulation/simulation.py" />
+        <option value="$PROJECT_DIR$/simulation/doctor.py" />
         <option value="$PROJECT_DIR$/simulation/graph.py" />
+        <option value="$PROJECT_DIR$/simulation/simulation.py" />
       </list>
     </option>
   </component>
@@ -283,6 +267,11 @@
               <item name="simulations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="greedy_weightfit" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
+            <path>
+              <item name="mm_clonal_evolution" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="simulation" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -314,6 +303,28 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.simulation">
+    <configuration name="graph (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="mm_clonal_evolution" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/simulation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/simulation/graph.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="graph" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="mm_clonal_evolution" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -407,10 +418,12 @@
       <item itemvalue="Python.main (1)" />
       <item itemvalue="Python.simulation" />
       <item itemvalue="Python.main (2)" />
+      <item itemvalue="Python.graph (1)" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.simulation" />
+        <item itemvalue="Python.graph (1)" />
         <item itemvalue="Python.main (2)" />
         <item itemvalue="Python.main (1)" />
         <item itemvalue="Python.graph" />
@@ -434,12 +447,12 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18389262" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18657719" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.4028369" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.293617" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -464,7 +477,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_rand_2/treatments.png" />
     <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_rand_1/treatments.png" />
     <entry file="file://$PROJECT_DIR$/data/simulations/greedy_equiv_random_test/params/params.txt">
       <provider selected="true" editor-type-id="text-editor" />
@@ -571,13 +583,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/data/simulations/many_subclones_clust_2/treatments.png" />
-    <entry file="file://$PROJECT_DIR$/simulation/doctor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1024">
-          <caret line="64" selection-start-line="64" selection-end-line="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/simulations/greedy_fit_working/fitness.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -591,29 +596,43 @@
     <entry file="file://$PROJECT_DIR$/data/simulations/many_subclones_clust_2/fitness.png" />
     <entry file="file://$PROJECT_DIR$/data/simulations/many_subclones_clust_2/graph.png" />
     <entry file="file://$PROJECT_DIR$/data/simulations/many_subclones_cluster/graph.png" />
-    <entry file="file://$PROJECT_DIR$/simulation/simulation.py">
+    <entry file="file://$PROJECT_DIR$/virtual_env/Lib/site-packages/matplotlib/axes/_axes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3392">
-          <caret line="221" column="21" selection-start-line="221" selection-start-column="21" selection-end-line="221" selection-end-column="21" />
+        <state relative-caret-position="150">
+          <caret line="4428" selection-start-line="4428" selection-end-line="4428" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulation/doctor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="75" column="4" lean-forward="true" selection-start-line="75" selection-start-column="4" selection-end-line="75" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulation/graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-238">
+          <caret line="99" column="108" selection-start-line="99" selection-start-column="108" selection-end-line="99" selection-end-column="108" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#610#628#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/simulation/subclone.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="25" column="36" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
+        <state relative-caret-position="512">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simulation/graph.py">
+    <entry file="file://$PROJECT_DIR$/simulation/simulation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        <state relative-caret-position="323">
+          <caret line="258" column="56" selection-start-line="258" selection-start-column="56" selection-end-line="258" selection-end-column="56" />
           <folding>
-            <element signature="e#610#628#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
