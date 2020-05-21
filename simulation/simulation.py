@@ -114,6 +114,7 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, sa
         # Adjust Proportion
         model.adjust_proportion()
         graph.update()
+    info = pd.DataFrame([(sc.label, np.round(sc.prop, 4), sc.fitness, sc.parent, np.round(sc.alpha, 2), np.round(sc.c, 2)) for sc in subclones], columns=["label", "prop", "fitness", "parent", "alpha", "c"])
     full_dir = None
     if save:
         savedir = os.path.join(os.path.split(os.getcwd())[0], "data", "simulations")
@@ -137,9 +138,8 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, sa
         np.save(os.path.join(full_dir, "params", "treatments.npy"), treatments)
 
         with open(os.path.join(full_dir, "params", "params.txt"), "w+") as f:
-            f.write("alpha: \n " + str(alphas) +
-                    " \ncs:\n" + str(cs)
-                    + "\ntreatments:\n"
+            f.write(info.to_string())
+            f.write("\ntreatments:\n"
                     + str(treatments)
                     + "\nstratlog: \n" + str(stratlog))
 
@@ -241,21 +241,20 @@ if __name__ == "__main__":
     num_treatments = 2
     treatments = np.zeros(shape=(MAX_TIME, num_treatments))
     tnames = ["Drug A", "Drug B"]
-
+    seed = 0
     # Let doctor prescribe every 5 time intervals
     dt = np.zeros(MAX_TIME)
     dt[::10] = 1
-    np.random.seed(0)
+    np.random.seed(seed)
 
-    subclones, adjacency_matrix = generate_random_subclones(n_init=3, max_subclones=5, seed=0, num_treatments=num_treatments)
+    subclones, adjacency_matrix = generate_random_subclones(n_init=3, max_subclones=5, seed=seed, num_treatments=num_treatments)
     names = [sc.label for sc in subclones]
     print ("ADJACENCY")
     print (pd.DataFrame(adjacency_matrix, columns=names, index=names))
 
-    # distro = np.array([0, 0, 0, 1])
-    # run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames, save=False, doc_times=dt,
-    #         distro=distro, doc_decay=0.98, dirname="greedy_degree", adj=adjacency_matrix)
+    distro = np.array([0, 0, 0, 0])
+    run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames, save=True, doc_times=dt,
+            distro=distro, doc_decay=1.0, dirname="zero_fit_nostrat_more_subclones_nodecay_seed%d"%seed, adj=adjacency_matrix)
 
-    info = pd.DataFrame([(sc.label, np.round(sc.prop, 4), sc.fitness, sc.parent, np.round(sc.alpha, 2)) for sc in subclones], columns=["label", "prop", "fitness", "parent", "alpha"])
-    print (info)
+
 

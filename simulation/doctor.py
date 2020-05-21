@@ -65,11 +65,11 @@ class Doctor():
 
     def greedy_degree(self, magnitude=1.0):
         """
-        Choose candidate with highest degree in graph.
+        Choose candidate with highest degree in graph, if it has any population
         :param magnitude:
         :return:
         """
-        degs = [self.simulation.graph.nxgraph.degree(sc, weight="weight") for sc in self.simulation.subclones]
+        degs = [self.simulation.graph.nxgraph.degree(sc, weight="weight") * (sc.prop > 0) for sc in self.simulation.subclones]
         affected_subclone = self.simulation.subclones[np.argmax(degs)]
         sus_drug = np.argmax(affected_subclone.alpha)
         treatment = np.zeros(self.num_drugs)
@@ -77,7 +77,7 @@ class Doctor():
         self.change_treatment(self.simulation.t, treatment)
 
 
-    def mixed_strategy(self):
+    def mixed_strategy(self, mag=1.0):
         """
         This function is an example about how to simulate a doctor strategy with randomness. The deterministic case
         corresponds to choosing the strategy defined in doctor.py.
@@ -86,11 +86,16 @@ class Doctor():
         """
         if self.distro is None:
             raise ValueError("Doctor must have a distribution specified for mixing")
-        strats = {"propweight": lambda doc: doc.greedy_propweighted_fitness(magnitude=1.0),
-                  "prop": lambda doc: doc.greedy_prop(magnitude=1.0),
-                  "fit": lambda doc: doc.greedy_fittest(magnitude=1.0),
-                  "degree": lambda doc: doc.greedy_degree(magnitude=1.0)
+        strats = {"propweight": lambda doc: doc.greedy_propweighted_fitness(magnitude=mag),
+                  "prop": lambda doc: doc.greedy_prop(magnitude=mag),
+                  "fit": lambda doc: doc.greedy_fittest(magnitude=mag),
+                  "degree": lambda doc: doc.greedy_degree(magnitude=mag)
                   }
-        strat = np.random.choice(list(strats.keys()), 1, p=self.distro)[0]
-
-        return strat, strats[strat]
+        if np.sum(self.distro) == 1:
+            strat = np.random.choice(list(strats.keys()), 1, p=self.distro)[0]
+            return strat, strats[strat]
+        elif np.sum(self.distro) == 0: # do nothing on purpose
+            strat = "propweight"
+            return strat, lambda doc: doc.greedy_propweighted_fitness(0)
+        else:
+            raise ValueError("Probability vector should sum to 1")

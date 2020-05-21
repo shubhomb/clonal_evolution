@@ -25,7 +25,7 @@ class Subclone:
         Returns the fitness with the given environment for subclone [type]
         @ param treatment: 1d np.ndarray of shape (num_treatments) for intensity of treatment
         """
-        self.fitness = 1 - self.c - np.dot(self.alpha, treatment)
+        self.fitness = max(0, min(1, 1 - self.c - np.dot(self.alpha, treatment)))
         return self.fitness
 
 
