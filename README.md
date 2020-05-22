@@ -6,4 +6,4 @@
 
 In our M.Eng project, we modeled the dynamics of tumor growth in cancer. Using evolutionary game theory, we try to characterize mutations and associated phenotypic fitness in terms of observed patterns of tumor growth. 
 
-Contact: Shubhom Bhattacharya (sb2287@cornell.edu) or Sameer Lal (sjl28@cornell.edu)
+Contact: Shubhom Bhattacharya (sb2287@cornell.edu) or Sameer Lal (sjl328@cornell.edu)
