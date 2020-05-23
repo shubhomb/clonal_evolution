@@ -93,8 +93,6 @@ class Graph():
     def plot(self, title, savefile=None):
         pos = nx.spring_layout(self.nxgraph, k=2/np.sqrt(len(self.sim.subclones)))
         # Plot graph with labels as specified by label_dict
-        cmap = plt.cm.get_cmap("Pastel2", len(self.sim.subclones))
-        colors = [cmap(i / len(self.sim.subclones) + 0.01) for i in range(len(self.sim.subclones))]
         labs = dict(zip(self.sim.subclones, self.sim.names))
 
         # weird nx thing makes you have to sort the label for (only) the node size argument in draw_networkx
@@ -102,7 +100,7 @@ class Graph():
         pops = {k: pops[k] for k in sorted(pops)}
 
 
-        nx.draw_networkx(self.nxgraph, pos, node_size=list(pops.values()),with_labels=True,labels=labs, width=0.5, font_size=10 , node_color=colors)
+        nx.draw_networkx(self.nxgraph, pos, node_size=list(pops.values()),with_labels=True,labels=labs, width=0.5, font_size=10 , node_color=self.sim.colors)
 
         # Create edge label Dictionary to label edges:
         edge_labels = nx.get_edge_attributes(self.nxgraph, "weight")

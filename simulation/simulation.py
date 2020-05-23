@@ -31,7 +31,12 @@ class Simulation:
         self.num_timesteps = self.treatments.shape[0]
         self.adj = adjacency
         self.graph = None
-
+        cmap = plt.cm.get_cmap("tab20", len(self.subclones))
+        names = sorted([sc.label for sc in subclones], key=str.lower)
+        self.colors = [cmap(i / len(self.subclones) + 0.01) for i in range(len(names))]
+        for j in range(len(names)):
+            if subclones[j].label == names[j]:
+                subclones[j].color = self.colors[j]
 
     def adjust_proportion(self):
         """
@@ -62,7 +67,7 @@ class Simulation:
         return  self.calc_avg_fitness()
 
 
-def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, save, doc_times=None, distro=None, doc_decay=0, dirname=None, adj=None):
+def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, save, doc_times=None, distro=None, doc_decay=0, dirname=None, adj=None, offset=0):
     '''
 
     :param max_time (int): The number of timesteps to consider
@@ -77,6 +82,7 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, sa
     :param doc_decay(float): Amount of exponential decay in treatment intensity after doctor action
     :param dirname (str): Path to save files
     :param adj(np.ndarray): shape (len(subclones), len(subclones)) specifying graph structure adjacency matrix with [0-1] edge weights
+    :param offset(int): how many of the first treatments to leave out (ex. if high intensity treatment)
     :return:
     '''
     if not treatments.shape[0] == max_time and treatments.shape[1] == num_treatments:
@@ -90,7 +96,7 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, sa
     graph = Graph(model)
     model.graph = graph
     doc = Doctor(model, schedule=doc_times, decay=doc_decay, distro=distro)
-    if distro.shape[0] != doc.num_strats:
+    if distro is not None and distro.shape[0] != doc.num_strats:
         raise ValueError("Define distribution over all doctor strategies")
     log_fitness = np.zeros(shape=(MAX_TIME, len(subclones)))
     log_props = np.zeros(shape=(MAX_TIME, len(subclones)))
@@ -102,9 +108,30 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, sa
         log_avg_fitness[t] = avg
 
         if doc_times[t]:
-            stratname, strat = doc.mixed_strategy() # perform doctor action according to predefined strategy profile (allows randomness)
-            stratlog.append(stratname)
-            strat(doc)
+            if distro is not None:
+                stratname, strat = doc.mixed_strategy() # perform doctor action according to predefined strategy profile (allows randomness)
+                stratlog.append(stratname)
+                strat(doc)
+            else:
+                s = input('Choose a strategy from {propweight, prop, fit, degree, none}: ')
+                print('you entered: ' + s)
+                if (not s.isdigit()) and (s not in ["propweight", "prop", "fit", "degree", "none"]):
+                    raise ValueError("Strategy %s not supported"%s)
+                stratlog.append(s)
+                if s == "propweight":
+                    doc.greedy_propweighted_fitness(magnitude=1, offset=offset)
+                elif s == "prop":
+                    doc.greedy_prop(magnitude=1, offset=offset)
+                elif s == "fit":
+                    doc.greedy_fittest(magnitude=1, offset=offset)
+                elif s == "degree":
+                    doc.greedy_degree(magnitude=1, offset=offset)
+                elif s == "none":
+                    doc.greedy_prop(magnitude=0, offset=offset)
+                elif s.isdigit():
+                    doc.index_action(magnitude=1, idx=int(s))
+
+
         matx = PayoffMatrix(model)
         if t == max_time - 1:
             print ('Payoff Matrix: ', t)
@@ -156,8 +183,8 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, sa
     plt.xlabel("t")
     plt.ylabel("proportion of tumor population")
     for i in range(len(subclones)):
-        plt.plot(x_axis, log_props[:, i].flatten(), label=subclones[i].label)
-    plt.legend()
+        plt.plot(x_axis, log_props[:, i].flatten(), label=subclones[i].label, color=subclones[i].color)
+    plt.legend(fontsize=6)
     title = "Proportion of tumor population over time"
     plt.title(title)
     if save:
@@ -169,9 +196,9 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, sa
     plt.xlabel("t")
     plt.ylabel("fitness of tumor population")
     for i in range(len(subclones)):
-        plt.plot(x_axis, log_fitness[:, i].flatten(), label=subclones[i].label)
+        plt.plot(x_axis, log_fitness[:, i].flatten(), label=subclones[i].label,color=subclones[i].color)
     plt.plot (x_axis, log_avg_fitness,  label="average")
-    plt.legend()
+    plt.legend(fontsize=6)
     title = "Subclonal fitness over time"
     plt.title(title)
     if save:
@@ -193,15 +220,18 @@ def run_sim(max_time, num_treatments, treatments, subclones, treatment_names, sa
         plt.savefig(os.path.join(full_dir, "treatments.png"))
     plt.show()
 
-def generate_random_subclones(n_init, max_subclones, seed, num_treatments, eps=0.0001, thresh=0.9):
+def generate_random_subclones(n_init, max_subclones, seed, num_treatments, eps=0.0001, thresh=0.9, bounds=None):
     np.random.seed(seed)
     subclones = []
     p_left = 1
     num_children = {}
     for j in range(n_init):
         lbl = chr(j + 65)
-        c = np.random.uniform()
+        c = np.random.uniform(low=0.1, high=0.4)
         alpha = np.random.uniform(size=num_treatments)
+        if bounds:
+            for p in range(len(bounds)):
+                alpha[p] = np.random.uniform(low=bounds[p][0], high =bounds[p][1])
         prop = max(0.0, np.random.uniform(eps,p_left))
         p_left -= prop
         subclones.append(Subclone(lbl=lbl, c=c, alpha=alpha, prop=prop))
@@ -238,23 +268,25 @@ def generate_random_subclones(n_init, max_subclones, seed, num_treatments, eps=0
 
 if __name__ == "__main__":
     MAX_TIME = 100
-    num_treatments = 2
+    num_treatments = 4
     treatments = np.zeros(shape=(MAX_TIME, num_treatments))
-    tnames = ["Drug A", "Drug B"]
+    tnames = ["Chemotherapy", "Immunotherapy", "Targeted A", "Targeted B"]
     seed = 0
     # Let doctor prescribe every 5 time intervals
     dt = np.zeros(MAX_TIME)
     dt[::10] = 1
     np.random.seed(seed)
+    bounds = [(0.7, 0.71), (0,1), (0.2, 0.3), (0.6, 0.8)]
 
-    subclones, adjacency_matrix = generate_random_subclones(n_init=3, max_subclones=5, seed=seed, num_treatments=num_treatments)
+    subclones, adjacency_matrix = generate_random_subclones(n_init=6, max_subclones=10, seed=seed, num_treatments=num_treatments, bounds=bounds)
     names = [sc.label for sc in subclones]
     print ("ADJACENCY")
     print (pd.DataFrame(adjacency_matrix, columns=names, index=names))
 
-    distro = np.array([0, 0, 0, 0])
+    distro = None
     run_sim(MAX_TIME, num_treatments, treatments, subclones, tnames, save=True, doc_times=dt,
-            distro=distro, doc_decay=1.0, dirname="zero_fit_nostrat_more_subclones_nodecay_seed%d"%seed, adj=adjacency_matrix)
+            distro=distro, doc_decay=1.0, dirname="interactive_6init_seed%d"%seed, adj=adjacency_matrix, offset=1)
 
-
+    info = pd.DataFrame([(sc.label, np.round(sc.prop, 4), sc.fitness, sc.parent, np.round(sc.alpha, 2), np.round(sc.c, 2)) for sc in subclones], columns=["label", "prop", "fitness", "parent", "alpha", "c"])
+    print (info)
 

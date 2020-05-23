@@ -8,7 +8,7 @@ class Subclone:
         :attr prop:     Current Proportion
     """
 
-    def __init__(self, lbl, c, alpha, prop=0.333, parent=None, birthtime=None):
+    def __init__(self, lbl, c, alpha, prop=0.333, parent=None, birthtime=None, color=None):
         self.label = lbl
         self.fitness = 0.0
         self.prop = prop
@@ -16,6 +16,7 @@ class Subclone:
         self.parent = parent
         self.alpha = alpha
         self.bt = birthtime
+        self.color = None
 
     def __str__(self):
         return self.label

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a00cb376-15da-4041-b3b3-d19558dc2749" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simulation/doctor.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/doctor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulation/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/graph.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simulation/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/simulation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simulation/subclone.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/subclone.py" afterDir="false" />
     </list>
@@ -22,7 +22,7 @@
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$viz.coverage" NAME="viz Coverage Results" MODIFIED="1586104483946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/search_engine_viz" />
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$graph.coverage" NAME="graph Coverage Results" MODIFIED="1587495307784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graph" />
     <SUITE FILE_PATH="coverage/mm_clonal_evolution$gompertz_growth.coverage" NAME="gompertz_growth Coverage Results" MODIFIED="1586102584444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/mm_clonal_evolution$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1590089861306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simulation" />
+    <SUITE FILE_PATH="coverage/mm_clonal_evolution$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1590181900482" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/simulation" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -74,16 +74,16 @@
           <entry key="md" value="4" />
           <entry key="npy" value="4" />
           <entry key="png" value="122" />
-          <entry key="py" value="72" />
-          <entry key="txt" value="20" />
+          <entry key="py" value="73" />
+          <entry key="txt" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="122" />
           <entry key="Markdown" value="4" />
-          <entry key="PLAIN_TEXT" value="27" />
-          <entry key="Python" value="72" />
+          <entry key="PLAIN_TEXT" value="28" />
+          <entry key="Python" value="73" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -92,7 +92,7 @@
           <entry key="dummy" value="18" />
           <entry key="gitignore" value="22" />
           <entry key="md" value="4790" />
-          <entry key="py" value="26977" />
+          <entry key="py" value="29025" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
@@ -100,7 +100,7 @@
         <counts>
           <entry key="Markdown" value="4790" />
           <entry key="PLAIN_TEXT" value="54" />
-          <entry key="Python" value="26977" />
+          <entry key="Python" value="29025" />
         </counts>
       </usages-collector>
     </session>
@@ -110,8 +110,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/simulation/simulation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="42" column="43" lean-forward="true" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+            <state relative-caret-position="334">
+              <caret line="136" column="39" selection-start-line="136" selection-start-column="39" selection-end-line="136" selection-end-column="39" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -122,8 +122,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simulation/graph.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-619">
-              <caret line="75" selection-start-line="75" selection-end-line="75" />
+            <state relative-caret-position="752">
+              <caret line="95" selection-start-line="95" selection-end-line="95" />
               <folding>
                 <element signature="e#610#628#0" expanded="true" />
               </folding>
@@ -134,8 +134,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simulation/doctor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="96" column="62" selection-start-line="96" selection-start-column="62" selection-end-line="96" selection-end-column="62" />
+            <state relative-caret-position="284">
+              <caret line="39" column="40" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
+              <folding>
+                <marker date="1590181893585" expanded="true" signature="1583:1729" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -143,8 +146,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simulation/subclone.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+            <state relative-caret-position="-196">
+              <caret line="10" column="89" selection-start-line="10" selection-start-column="89" selection-end-line="10" selection-end-column="89" />
             </state>
           </provider>
         </entry>
@@ -160,13 +163,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Node</find>
-      <find>class N</find>
-      <find>edge_label</find>
-      <find>save</find>
-      <find>choose</find>
-      <find>distro</find>
-      <find>distr</find>
       <find>graph.</find>
       <find>weight</find>
       <find>weigh</find>
@@ -181,7 +177,6 @@
       <find>num_treatments</find>
       <find>n_treatm</find>
       <find>chr</find>
-      <find>plot</find>
       <find>matx</find>
       <find>magnitude</find>
       <find>proportion of tu</find>
@@ -190,6 +185,14 @@
       <find>mkdir</find>
       <find>dirname</find>
       <find>prop</find>
+      <find>params.t</find>
+      <find>legend</find>
+      <find>color</find>
+      <find>plot</find>
+      <find>colors</find>
+      <find>bounds</find>
+      <find>distro is None</find>
+      <find>nfo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -214,10 +217,10 @@
         <option value="$PROJECT_DIR$/graph-model/graph.py" />
         <option value="$PROJECT_DIR$/graph-model/environment.py" />
         <option value="$PROJECT_DIR$/graph-model/doctor.py" />
-        <option value="$PROJECT_DIR$/simulation/graph.py" />
         <option value="$PROJECT_DIR$/data/simulations/greedy_degree_more_subclones/params/params.txt" />
-        <option value="$PROJECT_DIR$/simulation/doctor.py" />
+        <option value="$PROJECT_DIR$/simulation/graph.py" />
         <option value="$PROJECT_DIR$/simulation/subclone.py" />
+        <option value="$PROJECT_DIR$/simulation/doctor.py" />
         <option value="$PROJECT_DIR$/simulation/simulation.py" />
       </list>
     </option>
@@ -233,7 +236,7 @@
       <path value="$PROJECT_DIR$/virtual_env/Lib/site-packages/matplotlib/backends/web_backend/jquery-ui-1.12.1/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="65" />
     <option name="y" value="5" />
     <option name="width" value="1855" />
@@ -279,44 +282,14 @@
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="simulations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="greedy_degree_more_subclones_nodecay_seed42" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="interactive_subclones_nodecay_seed0" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="mm_clonal_evolution" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="simulations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="greedy_degree_more_subclones_nodecay_seed42" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="params" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mm_clonal_evolution" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="simulations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="greedy_fit_more_subclones_nodecay_seed0" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mm_clonal_evolution" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="simulations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="greedy_fit_more_subclones_nodecay_seed0" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="params" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mm_clonal_evolution" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="simulations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="greedy_prop_more_subclones_nodecay_seed0" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mm_clonal_evolution" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="simulations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="greedy_prop_more_subclones_nodecay_seed0" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="interactive_subclones_nodecay_seed0" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="params" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
@@ -497,15 +470,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2758389" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2751678" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.28936172" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.41560283" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -519,7 +492,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.7241611" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.7241611" />
       <window_info anchor="right" id="Database" order="4" weight="0.3295302" />
     </layout>
   </component>
@@ -529,23 +502,7 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/simulation/doctor.py</url>
-          <line>61</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/drug-resis/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1279" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graph-model/environment.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -673,16 +630,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simulation/graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-619">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
-          <folding>
-            <element signature="e#610#628#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/simulations/greedy_prop_more_subclones_nodecay_seed0/params/params.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -692,24 +639,44 @@
     <entry file="file://$PROJECT_DIR$/data/simulations/zero_fit_greedy_degree_more_subclones_nodecay_seed0/params/params.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/simulation/doctor.py">
+    <entry file="file://$PROJECT_DIR$/data/simulations/interactive_subclones_nodecay_seed0/params/params.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="96" column="62" selection-start-line="96" selection-start-column="62" selection-end-line="96" selection-end-column="62" />
+        <state relative-caret-position="1824">
+          <caret line="114" column="45" selection-start-line="114" selection-start-column="45" selection-end-line="114" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/simulation/subclone.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        <state relative-caret-position="-196">
+          <caret line="10" column="89" selection-start-line="10" selection-start-column="89" selection-end-line="10" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulation/graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="752">
+          <caret line="95" selection-start-line="95" selection-end-line="95" />
+          <folding>
+            <element signature="e#610#628#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulation/doctor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="39" column="40" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
+          <folding>
+            <marker date="1590181893585" expanded="true" signature="1583:1729" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/simulation/simulation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="42" column="43" lean-forward="true" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+        <state relative-caret-position="334">
+          <caret line="136" column="39" selection-start-line="136" selection-start-column="39" selection-end-line="136" selection-end-column="39" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

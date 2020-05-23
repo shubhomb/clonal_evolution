@@ -25,45 +25,49 @@ class Doctor():
             for j in range(1,next_time - t):
                 self.simulation.treatments[t + j :] *= max(0, self.decay ** j)
 
-    def greedy_fittest(self, magnitude=1.0):
+    def greedy_fittest(self, magnitude=1.0, offset=0):
         """
         Choose candidate with greatest fitness.
         :param magnitude:
         :return:
         """
         fittest_subclone = self.simulation.subclones[np.argmax([f.fitness for f in self.simulation.subclones])]
-        sus_drug = np.argmax(fittest_subclone.alpha)
+        sus_drug = np.argsort(fittest_subclone.alpha)[fittest_subclone.alpha.shape[0] - offset]
         treatment = np.zeros(self.num_drugs)
         treatment[sus_drug] = magnitude
         self.change_treatment(self.simulation.t, treatment)
 
+    def index_action(self, magnitude=1.0, idx=0):
+        treatment = np.zeros(self.num_drugs)
+        treatment[idx] = magnitude
+        self.change_treatment(self.simulation.t, treatment)
 
-    def greedy_prop(self, magnitude=1.0):
+    def greedy_prop(self, magnitude=1.0, offset=0):
         """
         Choose candidate with greatest proportion.
         :param magnitude:
         :return:
         """
         populous_subclone = self.simulation.subclones[np.argmax([f.prop for f in self.simulation.subclones])]
-        sus_drug = np.argmax(populous_subclone.alpha)
+        sus_drug = np.argsort(populous_subclone.alpha)[populous_subclone.alpha.shape[0] - offset]
         treatment = np.zeros(self.num_drugs)
         treatment[sus_drug] = magnitude
         self.change_treatment(self.simulation.t, treatment)
 
-    def greedy_propweighted_fitness(self, magnitude=1.0):
+    def greedy_propweighted_fitness(self, magnitude=1.0, offset=0):
         """
         Choose candidate with greatest product of fitness and proportion.
         :param magnitude:
         :return:
         """
         weighted_subclone = self.simulation.subclones[np.argmax([f.prop * f.fitness for f in self.simulation.subclones])]
-        sus_drug = np.argmax(weighted_subclone.alpha)
+        sus_drug = np.argsort(weighted_subclone.alpha)[weighted_subclone.alpha.shape[0] - offset]
         treatment = np.zeros(self.num_drugs)
         treatment[sus_drug] = magnitude
         self.change_treatment(self.simulation.t, treatment)
 
 
-    def greedy_degree(self, magnitude=1.0):
+    def greedy_degree(self, magnitude=1.0, offset=0):
         """
         Choose candidate with highest degree in graph, if it has any population
         :param magnitude:
@@ -71,7 +75,7 @@ class Doctor():
         """
         degs = [self.simulation.graph.nxgraph.degree(sc, weight="weight") * (sc.prop > 0) for sc in self.simulation.subclones]
         affected_subclone = self.simulation.subclones[np.argmax(degs)]
-        sus_drug = np.argmax(affected_subclone.alpha)
+        sus_drug = np.argsort(affected_subclone.alpha)[affected_subclone.alpha.shape[0] - offset]
         treatment = np.zeros(self.num_drugs)
         treatment[sus_drug] = magnitude
         self.change_treatment(self.simulation.t, treatment)
